@@ -31,6 +31,7 @@ GEM
     ancestry (1.2.5)
       activerecord (>= 2.2.2)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     browsercms (3.5.7)
       ancestry (~> 1.2.4)
       ckeditor_rails (~> 3.6.4)
@@ -54,6 +55,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    devise (2.2.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
@@ -70,6 +76,7 @@ GEM
     mime-types (1.25)
     multi_json (1.8.0)
     mysql2 (0.3.13)
+    orm_adapter (0.4.0)
     paperclip (3.0.4)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -128,6 +135,8 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.1)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -135,6 +144,7 @@ PLATFORMS
 DEPENDENCIES
   browsercms (= 3.5.7)
   coffee-rails (~> 3.2.1)
+  devise
   jquery-rails (~> 2.0)
   mysql2
   rails (= 3.2.14)
