@@ -41,3 +41,4 @@ gem 'jquery-rails', '~> 2.0'
 gem "browsercms", "3.5.7"
 
 gem "devise"
+gem "cancan"
