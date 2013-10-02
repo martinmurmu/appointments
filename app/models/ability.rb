@@ -28,5 +28,21 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+
+    @user = user || User.new # for guest
+
+    if @user.role.nil? || @user.role == ""
+      can :create, :session  # for guest without roles
+    else
+      send(@user.role)
+    end
+  end
+
+  def manager
+    can :manage, Appointment
+  end
+
+  def admin
+    can :manage, :all
   end
 end

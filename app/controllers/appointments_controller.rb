@@ -1,8 +1,11 @@
 class AppointmentsController < ApplicationController
+
+  load_and_authorize_resource
+
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all
+#    @appointments = Appointment.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-    @appointment = Appointment.find(params[:id])
+#    @appointment = Appointment.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +27,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments/new
   # GET /appointments/new.json
   def new
-    @appointment = Appointment.new
+#    @appointment = Appointment.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +37,13 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1/edit
   def edit
-    @appointment = Appointment.find(params[:id])
+#    @appointment = Appointment.find(params[:id])
   end
 
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new(params[:appointment])
+#    @appointment = Appointment.new(params[:appointment])
 
     respond_to do |format|
       if @appointment.save
@@ -56,7 +59,7 @@ class AppointmentsController < ApplicationController
   # PUT /appointments/1
   # PUT /appointments/1.json
   def update
-    @appointment = Appointment.find(params[:id])
+#    @appointment = Appointment.find(params[:id])
 
     respond_to do |format|
       if @appointment.update_attributes(params[:appointment])
@@ -72,7 +75,7 @@ class AppointmentsController < ApplicationController
   # DELETE /appointments/1
   # DELETE /appointments/1.json
   def destroy
-    @appointment = Appointment.find(params[:id])
+#    @appointment = Appointment.find(params[:id])
     @appointment.destroy
 
     respond_to do |format|
