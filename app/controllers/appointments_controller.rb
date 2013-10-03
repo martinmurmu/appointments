@@ -1,11 +1,11 @@
 class AppointmentsController < ApplicationController
 
-  load_and_authorize_resource
+  authorize_resource
 
   # GET /appointments
   # GET /appointments.json
   def index
-#    @appointments = Appointment.all
+    @appointments = current_user.rolable.appointments
 
     respond_to do |format|
       format.html # index.html.erb

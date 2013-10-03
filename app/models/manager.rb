@@ -1,6 +1,7 @@
 class Manager < ActiveRecord::Base
 
-  has_one :user
+  has_one :user, :as => :rolable
+
   has_many :appointments
   has_many :consumers, :through => :appointments
 
