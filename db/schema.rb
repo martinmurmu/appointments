@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002144210) do
+ActiveRecord::Schema.define(:version => 20131003134553) do
+
+  create_table "admins", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "appointments", :force => true do |t|
     t.string   "title"
@@ -20,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20131002144210) do
     t.time     "time"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "manager_id"
+    t.integer  "consumer_id"
   end
 
   create_table "cms_attachment_versions", :force => true do |t|
@@ -509,6 +517,21 @@ ActiveRecord::Schema.define(:version => 20131002144210) do
   add_index "cms_users", ["expires_at"], :name => "index_cms_users_on_expires_at"
   add_index "cms_users", ["login"], :name => "index_cms_users_on_login", :unique => true
 
+  create_table "consumers", :force => true do |t|
+    t.string   "phone_number", :default => "", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "managers", :force => true do |t|
+    t.string   "practice_name",    :default => "", :null => false
+    t.string   "practice_address", :default => "", :null => false
+    t.string   "practice_phone",   :default => "", :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -523,6 +546,7 @@ ActiveRecord::Schema.define(:version => 20131002144210) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "role"
+    t.string   "type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
