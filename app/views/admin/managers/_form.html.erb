@@ -1,0 +1,29 @@
+<%= form_for([:admin, @manager]) do |f| %>
+  <% if @manager.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@manager.errors.count, "error") %> prohibited this manager from being saved:</h2>
+
+      <ul>
+      <% @manager.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Name" %><br />
+    <%= f.text_field :practice_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Phone" %><br />
+    <%= f.text_field :practice_phone %>
+  </div>
+  <div class="field">
+    <%= f.label "Address" %><br />
+    <%= f.text_field :practice_address %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
