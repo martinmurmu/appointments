@@ -1,4 +1,4 @@
-class Admin::ManagersController < ApplicationController
+class Admin::ManagersController < AdminController
 
   # GET /admin/managers
   # GET /admin/managers.json
