@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Phone:</b>
+  <%= @consumer.phone_number %>
+</p>
+
+<%= link_to 'Edit', edit_admin_consumer_path(@consumer) %> |
+<%= link_to 'Back', admin_consumers_path %>
