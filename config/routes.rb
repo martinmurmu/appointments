@@ -1,8 +1,6 @@
 Appointments::Application.routes.draw do
   root :to => 'home#index'
 
-  devise_for :users
-
   resources :appointments
 
   # The priority is based upon order of creation:
@@ -62,7 +60,10 @@ Appointments::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+  devise_for :admin, :class_name => "User"
+
   namespace :admin do
+    root :to => 'home#index'
     resources :managers
     resources :consumers
     resources :appointments
