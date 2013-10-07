@@ -51,3 +51,5 @@ gem "browsercms", "3.5.7"
 
 gem "devise"
 gem "cancan"
+
+gem "twilio-ruby"
