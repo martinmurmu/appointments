@@ -1,0 +1,33 @@
+<h1>Listing appointments</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @appointments.each do |appointment| %>
+  <tr>
+    <td><%= appointment.title %></td>
+    <td><%= appointment.description %></td>
+    <td><%= appointment.date %></td>
+    <td><%= appointment.time %></td>
+    <td><%= link_to 'Show', manager_appointment_path(appointment) %></td>
+    <td><%= link_to 'Edit', edit_manager_appointment_path(appointment) %></td>
+    <td><%= link_to 'Destroy', manager_appointment_path(appointment), method: :delete, data: { confirm: 'Are you sure?' } %> | </td>
+    <td><%= link_to 'Consumers', manager_appointment_consumers_path(appointment) %></td>
+    <td><%= link_to 'Add Consumer', new_manager_appointment_consumer_path(appointment) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Appointment', new_manager_appointment_path %>

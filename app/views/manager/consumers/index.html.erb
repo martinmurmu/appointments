@@ -1,0 +1,23 @@
+<h1>Listing consumers</h1>
+
+<table>
+  <tr>
+    <th>Phone</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @consumers.each do |consumer| %>
+  <tr>
+    <td><%= consumer.phone_number %></td>
+    <td><%= link_to 'Show', manager_consumer_path(consumer) %></td>
+    <td><%= link_to 'Edit', edit_manager_consumer_path(consumer) %></td>
+    <td><%= link_to 'Destroy', manager_consumer_path(consumer), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Consumer', new_manager_consumer_path %>
