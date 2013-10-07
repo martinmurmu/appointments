@@ -61,6 +61,11 @@ Appointments::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   devise_for :admin, :class_name => "User"
+#  , :controllers => { 
+#    :sessions => "admin/sessions"
+#  }
+
+  devise_for :manager, :class_name => "User"
 
   namespace :admin do
     root :to => 'home#index'
@@ -70,8 +75,15 @@ Appointments::Application.routes.draw do
   end
 
   namespace :manager do
-    resources :consumers
-    resources :appointments
+    root :to => 'home#index'
+
+    resources :appointments do
+      resources :consumers
+    end
+
+    resources :consumers do
+      resources :appointments
+    end
   end
 
   mount_browsercms
