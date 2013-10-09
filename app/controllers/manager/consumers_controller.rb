@@ -62,6 +62,8 @@ class Manager::ConsumersController < ManagerController
 
     respond_to do |format|
       if @consumer.save
+        # If consumer already has a relationship with the current manager then there must be a tag between them
+        tag = Tag.where(:consumer_id => @consumer.id, :manager_id => current_manager.id).first_or_create
         if !pin.nil?
           pin.save
         end
