@@ -27,7 +27,7 @@ class Manager::ConsumersController < ManagerController
     end
   end
 
-  # GET /manager/ppointments/new
+  # GET /manager/consumers/new
   # GET /manager/consumers/new.json
   def new
     if params[:appointment_id]
@@ -49,8 +49,9 @@ class Manager::ConsumersController < ManagerController
 
   # POST /manager/consumers
   # POST /manager/consumers.json
+  # TODO Check if this must be done in another action
   def create
-    @consumer = Consumer.new(params[:consumer])
+    @consumer = Consumer.where(params[:consumer]).first_or_create
 
     if params[:appointment_id]
       appointment = Appointment.find(params[:appointment_id])

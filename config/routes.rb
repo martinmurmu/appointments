@@ -78,12 +78,13 @@ Appointments::Application.routes.draw do
     root :to => 'home#index'
 
     resources :appointments do
+      member do
+        get 'consumers'
+      end
       resources :consumers
     end
 
-    resources :consumers do
-      resources :appointments
-    end
+    resources :consumers
   end
 
   mount_browsercms

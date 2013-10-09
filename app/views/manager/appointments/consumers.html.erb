@@ -1,0 +1,43 @@
+<h1>Listing consumers for appointment <%= @appointment.title %></h1>
+
+<%= form_for([:manager, @appointment, @consumer]) do |f| %>
+  <% if @consumer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>
+
+      <ul>
+      <% @consumer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Phone" %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Add or create new consumer' %>
+  </div>
+<% end %>
+
+<table>
+  <tr>
+    <th>PIN</th>
+    <th>Phone</th>
+    <th></th>
+  </tr>
+
+<% @appointment.pins.each do |pin| %>
+  <tr>
+    <td><%= pin.pin %></td>
+    <td><%= pin.consumer.phone_number %></td>
+    <td><%= link_to 'Remove' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', manager_appointments_path %>

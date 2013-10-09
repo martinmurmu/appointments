@@ -22,8 +22,7 @@
     <td><%= link_to 'Show', manager_appointment_path(appointment) %></td>
     <td><%= link_to 'Edit', edit_manager_appointment_path(appointment) %></td>
     <td><%= link_to 'Destroy', manager_appointment_path(appointment), method: :delete, data: { confirm: 'Are you sure?' } %> | </td>
-    <td><%= link_to 'Consumers', manager_appointment_consumers_path(appointment) %></td>
-    <td><%= link_to 'Add Consumer', new_manager_appointment_consumer_path(appointment) %></td>
+    <td><%= link_to 'Consumers', consumers_manager_appointment_path(appointment) %></td>
   </tr>
 <% end %>
 </table>
