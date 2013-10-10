@@ -14,7 +14,8 @@
       <%= link_to "Home", manager_root_path %>
       <% if manager_signed_in? %>
         Logged in as <strong><%= current_manager.email %></strong>
-        <%= link_to "Edit profile", edit_manager_registration_path %>
+        <%= link_to "Edit profile", manager_profile_path %>
+        <%= link_to "Account", edit_manager_registration_path %>
         <%= link_to "Logout", destroy_manager_session_path, method: :delete %>
       <% else %>
         <%= link_to "Sign up", new_manager_registration_path %>
