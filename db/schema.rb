@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930164165) do
+ActiveRecord::Schema.define(:version => 20131009125710) do
+
+  create_table "admins", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "appointments", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.date     "date"
+    t.time     "time"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "manager_id"
+    t.integer  "consumer_id"
+  end
 
   create_table "cms_attachment_versions", :force => true do |t|
     t.integer  "original_record_id"
@@ -499,5 +516,58 @@ ActiveRecord::Schema.define(:version => 20130930164165) do
 
   add_index "cms_users", ["expires_at"], :name => "index_cms_users_on_expires_at"
   add_index "cms_users", ["login"], :name => "index_cms_users_on_login", :unique => true
+
+  create_table "consumers", :force => true do |t|
+    t.string   "phone_number", :default => "", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "managers", :force => true do |t|
+    t.string   "practice_name",    :default => "", :null => false
+    t.string   "practice_address", :default => "", :null => false
+    t.string   "practice_phone",   :default => "", :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "pins", :force => true do |t|
+    t.string   "pin",            :null => false
+    t.integer  "appointment_id", :null => false
+    t.integer  "consumer_id",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "tags",        :default => "", :null => false
+    t.integer  "consumer_id",                 :null => false
+    t.integer  "manager_id",                  :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "role"
+    t.string   "type"
+    t.integer  "rolable_id"
+    t.string   "rolable_type"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

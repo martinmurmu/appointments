@@ -38,5 +38,18 @@ gem 'jquery-rails', '~> 2.0'
 # To use debugger
 # gem 'debugger'
 
+gem "rspec-rails", :group => [:test, :development]
+
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+  gem "cucumber"
+end
 
 gem "browsercms", "3.5.7"
+
+gem "devise"
+gem "cancan"
+
+gem "twilio-ruby"

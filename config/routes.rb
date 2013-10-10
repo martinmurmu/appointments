@@ -1,4 +1,8 @@
 Appointments::Application.routes.draw do
+  root :to => 'home#index'
+
+  resources :appointments
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -55,6 +59,36 @@ Appointments::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  devise_for :admin, :class_name => "User"
+#  , :controllers => { 
+#    :sessions => "admin/sessions"
+#  }
+
+  devise_for :manager, :class_name => "User", :controllers => {
+    :registrations => "manager/registrations"
+  }
+
+  namespace :admin do
+    root :to => 'home#index'
+    resources :managers
+    resources :consumers
+    resources :appointments
+  end
+
+  namespace :manager do
+    root :to => 'home#index'
+    get 'profile' => 'profiles#edit'
+    put 'profile' => 'profiles#update'
+    resources :appointments do
+      member do
+        get 'consumers'
+      end
+      resources :consumers
+    end
+
+    resources :consumers
+  end
 
   mount_browsercms
 end
