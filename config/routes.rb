@@ -65,7 +65,9 @@ Appointments::Application.routes.draw do
 #    :sessions => "admin/sessions"
 #  }
 
-  devise_for :manager, :class_name => "User"
+  devise_for :manager, :class_name => "User", :controllers => {
+    :registrations => "manager/registrations"
+  }
 
   namespace :admin do
     root :to => 'home#index'
