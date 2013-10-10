@@ -78,7 +78,8 @@ Appointments::Application.routes.draw do
 
   namespace :manager do
     root :to => 'home#index'
-
+    get 'profile' => 'profiles#edit'
+    put 'profile' => 'profiles#update'
     resources :appointments do
       member do
         get 'consumers'
