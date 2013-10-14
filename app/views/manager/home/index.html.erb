@@ -2,5 +2,8 @@
 
 <p>Prototype for manager's home page.</p>
 
-
+<% if manager_signed_in? %>
+  <%= link_to "Listing consumers", manager_consumers_path %>
+  <%= link_to "Listing appointments", manager_appointments_path %>
+<% end %>
 
