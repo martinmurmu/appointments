@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131009125710) do
+ActiveRecord::Schema.define(:version => 20131014165445) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -24,10 +24,12 @@ ActiveRecord::Schema.define(:version => 20131009125710) do
     t.text     "description"
     t.date     "date"
     t.time     "time"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "manager_id"
     t.integer  "consumer_id"
+    t.string   "status",       :default => "open"
+    t.string   "assigned_pin"
   end
 
   create_table "cms_attachment_versions", :force => true do |t|
