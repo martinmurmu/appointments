@@ -37,4 +37,10 @@ class Manager::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  # The default url to be used after updating a resource. You need to overwrite
+  # this method in your own RegistrationsController.
+  def after_update_path_for(resource)
+    manager_root_path
+  end
+
 end
