@@ -6,6 +6,8 @@
     <th>Description</th>
     <th>Date</th>
     <th>Time</th>
+    <th>Status</th>
+    <th>Assigned PIN</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +19,8 @@
     <td><%= appointment.description %></td>
     <td><%= appointment.date %></td>
     <td><%= appointment.time %></td>
+    <td><%= appointment.status %></td>
+    <td><%= appointment.assigned_pin %></td>
     <td><%= link_to 'Show', appointment %></td>
     <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
     <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

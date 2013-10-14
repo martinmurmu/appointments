@@ -12,7 +12,7 @@
   <tr>
     <td><%= consumer.phone_number %></td>
     <!-- TODO: This can be expensive -->
-    <td><%= consumer.tags.where(:manager_id => current_manager.id).first.tags %></td>
+    <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
     <td><%= link_to 'Show', manager_consumer_path(consumer) %></td>
     <td><%= link_to 'Edit', edit_manager_consumer_path(consumer) %></td>
     <td><%= link_to 'Destroy', manager_consumer_path(consumer), method: :delete, data: { confirm: 'Are you sure?' } %></td>

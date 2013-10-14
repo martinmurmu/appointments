@@ -3,6 +3,8 @@ class Manager::ConsumersController < ManagerController
   # GET /manager/consumers
   # GET /manager/consumers.json
   def index
+    logger.debug current_manager
+
     if params[:appointment_id]
       appointment = Appointment.find(params[:appointment_id])
       @consumers = appointment.consumers
@@ -62,8 +64,8 @@ class Manager::ConsumersController < ManagerController
 
     respond_to do |format|
       if @consumer.save
-        # If consumer already has a relationship with the current manager then there must be a tag between them
-        tag = Tag.where(:consumer_id => @consumer.id, :manager_id => current_manager.id).first_or_create
+        logger.debug current_manager.rolable
+        tag = Tag.where(:consumer_id => @consumer.id, :manager_id => current_manager.rolable.id).first_or_create
         if !pin.nil?
           pin.save
         end
