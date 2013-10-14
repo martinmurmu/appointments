@@ -90,5 +90,8 @@ Appointments::Application.routes.draw do
     resources :consumers
   end
 
+  # Consumer's messages will go to this route.
+  post 'sms' => 'receiver#parse'
+
   mount_browsercms
 end
