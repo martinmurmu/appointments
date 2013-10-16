@@ -17,12 +17,12 @@ class Tag < ActiveRecord::Base
 
     # Create and send an SMS message. Message must be editable?
     logger.debug "Welcome message..."
-    logger.debug "From: #{self.manager.practice_phone}"
+    logger.debug "From: #{TWILIO_CONFIG['from']}"
     logger.debug "To: #{self.consumer.phone_number}"
     logger.debug "Message: #{message}"
 
     client.account.sms.messages.create(
-      from: self.manager.practice_phone,
+      from: TWILIO_CONFIG['from'],
       to: self.consumer.phone_number,
       body: message
     )
