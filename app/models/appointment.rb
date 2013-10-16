@@ -34,7 +34,6 @@ class Appointment < ActiveRecord::Base
 
     manager = self.manager
     manager_practice_name = manager.practice_name
-    manager_practice_phone = manager.practice_phone
 
     appointment_date = self.date.strftime("%m/%d")
     appointment_time = self.time.strftime("%H:%M")
@@ -47,12 +46,12 @@ class Appointment < ActiveRecord::Base
 
       # Create and send an SMS message. Message must be editable?
       logger.debug "New slot message..."
-      logger.debug "From: #{manager_practice_phone}"
+      logger.debug "From: #{TWILIO_CONFIG['from']}"
       logger.debug "To: #{consumer.phone_number}"
       logger.debug "Message: #{message}"
 
       sms = client.account.sms.messages.create(
-        from: manager_practice_phone,
+        from: TWILIO_CONFIG['from'],
         to: consumer.phone_number,
         body: message
       )
