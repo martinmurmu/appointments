@@ -51,11 +51,20 @@ class Appointment < ActiveRecord::Base
       logger.debug "To: #{consumer.phone_number}"
       logger.debug "Message: #{message}"
 
-#    client.account.sms.messages.create(
-#      from: manager_practice_phone,
-#      to: consumer.phone_number,
-#      body: message
-#    )
+      sms = client.account.sms.messages.create(
+        from: manager_practice_phone,
+        to: consumer.phone_number,
+        body: message
+      )
+
+      Message.create!(
+        :sms_sid => sms.sid,
+        :consumer_id => consumer_id,
+        :manager_id => manager_id,
+        :body => sms.body,
+        :from => sms.from,
+        :to => sms.to
+      )
     end
   end
 

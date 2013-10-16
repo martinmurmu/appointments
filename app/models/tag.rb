@@ -21,10 +21,19 @@ class Tag < ActiveRecord::Base
     logger.debug "To: #{self.consumer.phone_number}"
     logger.debug "Message: #{message}"
 
-#    client.account.sms.messages.create(
-#      from: self.manager.practice_phone,
-#      to: self.consumer.phone_number,
-#      body: message
-#    )
+    client.account.sms.messages.create(
+      from: self.manager.practice_phone,
+      to: self.consumer.phone_number,
+      body: message
+    )
+
+    Message.create!(
+      :sms_sid => sms.sid,
+      :consumer_id => self.consumer.id,
+      :manager_id => self.manager.id,
+      :body => sms.body,
+      :from => sms.from,
+      :to => sms.to
+    )
   end
 end
