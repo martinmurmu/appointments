@@ -58,8 +58,8 @@ class Appointment < ActiveRecord::Base
 
       Message.create!(
         :sms_sid => sms.sid,
-        :consumer_id => consumer_id,
-        :manager_id => manager_id,
+        :consumer => consumer,
+        :manager => manager,
         :body => sms.body,
         :from => sms.from,
         :to => sms.to
