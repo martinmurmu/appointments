@@ -3,6 +3,8 @@ class Tag < ActiveRecord::Base
   belongs_to :manager
   belongs_to :consumer
 
+  attr_accessible :tags
+
   after_create :send_welcome_message
 
   protected
@@ -21,7 +23,7 @@ class Tag < ActiveRecord::Base
     logger.debug "To: #{self.consumer.phone_number}"
     logger.debug "Message: #{message}"
 
-    client.account.sms.messages.create(
+    sms = client.account.sms.messages.create(
       from: TWILIO_CONFIG['from'],
       to: self.consumer.phone_number,
       body: message
@@ -29,8 +31,8 @@ class Tag < ActiveRecord::Base
 
     Message.create!(
       :sms_sid => sms.sid,
-      :consumer_id => self.consumer.id,
-      :manager_id => self.manager.id,
+      :consumer => self.consumer,
+      :manager => self.manager,
       :body => sms.body,
       :from => sms.from,
       :to => sms.to

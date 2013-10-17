@@ -5,12 +5,20 @@ class ReceiverController < ActionController::Base
     
     message_body = params["Body"]
     from_number = params["From"]
- 
+
+    if (message_body.nil? || from_number.nil?)
+      respond(:status => 400)
+    end
+
     logger.debug from_number
     logger.debug message_body
 
     # Example: "Y 123"
     parsedMessage = message_body.split(" ") # ["Y", "123"]
+
+    if (parsedMessage.length < 2)
+        parsedMessage = [message_body.first, message_body.slice(1..message_body.length-1)]
+    end
 
     message = ""
 
@@ -42,9 +50,8 @@ class ReceiverController < ActionController::Base
     when "X"
       manager = Manager.find(parsedMessage[1])
       consumer = Consumer.where(:phone_number => from_number).first
-
       tag = Tag.where(:manager_id => manager.id, :consumer_id => consumer.id).first
-      #tag.destroy
+      tag.destroy
 
       message = "No worries, you are off the list."
     end

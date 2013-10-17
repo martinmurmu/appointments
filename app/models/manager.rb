@@ -9,6 +9,8 @@ class Manager < ActiveRecord::Base
 
   attr_accessible :practice_name, :practice_phone, :practice_address
 
+  validates :practice_name, :practice_phone, :practice_address, :presence => true
+
 # This must be a rake task?
 #  After each 72 hours... "You are still on the [PracticeName] waitlist. 
 #  If you'd like to be removed please reply "X" to this message and we remove 

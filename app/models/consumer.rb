@@ -7,5 +7,8 @@ class Consumer < ActiveRecord::Base
   has_many :managers, :through => :tags
 
   attr_accessible :phone_number
+
+  validates :phone_number, :presence => true
+  validates :phone_number, :uniqueness => true
 end
 
