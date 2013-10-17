@@ -3,6 +3,8 @@ class Tag < ActiveRecord::Base
   belongs_to :manager
   belongs_to :consumer
 
+  attr_accessible :tags
+
   after_create :send_welcome_message
 
   protected

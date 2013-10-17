@@ -9,6 +9,8 @@ class Appointment < ActiveRecord::Base
 
   after_create :send_message_to_consumers
 
+  validates :date, :time, :presence => true
+
   def is_open?
     return (self.status == "open")
   end
@@ -41,7 +43,7 @@ class Appointment < ActiveRecord::Base
     # TODO: We need to batch this!!!
     self.manager.consumers.each do |consumer|
       message = "#{manager_practice_name} has an open slot at #{appointment_time} on #{appointment_date}." 
-      message += " Respond to 'Y #{self.id}' to this text and we will send you a confirmation pin"
+      message += " Respond with 'Y #{self.id}' to this text and we will send you a confirmation pin"
       message += " and the booking phone number! Slots go fast, so please confirm as soon as practical."
 
       # Create and send an SMS message. Message must be editable?
