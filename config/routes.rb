@@ -87,7 +87,12 @@ Appointments::Application.routes.draw do
       resources :consumers
     end
 
-    resources :consumers
+    resources :consumers do
+      member do
+        get 'tags'
+      end
+      resources :tags
+    end
   end
 
   # Consumer's messages will go to this route.

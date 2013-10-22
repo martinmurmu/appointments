@@ -5,5 +5,10 @@
   <%= @consumer.phone_number %>
 </p>
 
+<p>
+  <b>Tags:</b>
+  <%= @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %>
+</p>
+
 <%= link_to 'Edit', edit_manager_consumer_path(@consumer) %> |
 <%= link_to 'Back', manager_consumers_path %>

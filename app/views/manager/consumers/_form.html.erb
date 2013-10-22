@@ -1,4 +1,4 @@
-<%= form_for([:manager, @appointment, @consumer]) do |f| %>
+<%= form_for([:manager, @consumer]) do |f| %>
   <% if @consumer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>
@@ -15,6 +15,16 @@
     <%= f.label "Phone" %><br />
     <%= f.text_field :phone_number %>
   </div>
+
+  <div class="field">
+    <%= f.label "Tags" %><br />
+    <% if (@consumer.new_record?) %>
+      <%= text_field_tag :tags %>
+    <% else %>
+      <%= text_field_tag :tags, @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
