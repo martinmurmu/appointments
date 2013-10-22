@@ -32,10 +32,6 @@ class Manager::ConsumersController < ManagerController
   # GET /manager/consumers/new
   # GET /manager/consumers/new.json
   def new
-    if params[:appointment_id]
-      @appointment = Appointment.find(params[:appointment_id])
-    end
-
     @consumer = Consumer.new
 
     respond_to do |format|
@@ -54,21 +50,14 @@ class Manager::ConsumersController < ManagerController
   # TODO Check if this must be done in another action
   def create
     @consumer = Consumer.where(params[:consumer]).first_or_create
-
-    if params[:appointment_id]
-      appointment = Appointment.find(params[:appointment_id])
-      pin = Pin.new
-      pin.appointment = appointment
-      pin.consumer = @consumer
-    end
+    @consumer.tags.create(
+      :manager_id => current_manager.rolable.id,
+      :tags => params[:tags]
+    )
 
     respond_to do |format|
       if @consumer.save
-        logger.debug current_manager.rolable
-        tag = Tag.where(:consumer_id => @consumer.id, :manager_id => current_manager.rolable.id).first_or_create
-        if !pin.nil?
-          pin.save
-        end
+        logger.debug @consumer
         format.html { redirect_to manager_consumer_path(@consumer), notice: 'Consumer was successfully created.' }
         format.json { render json: manager_consumer_path(@consumer), status: :created, location: @consumer }
       else
@@ -82,9 +71,11 @@ class Manager::ConsumersController < ManagerController
   # PUT /manager/consumers/1.json
   def update
     @consumer = Consumer.find(params[:id])
-
+    tag = @consumer.tags.where(:manager_id => current_manager.rolable.id).first
+    tag.tags = params[:tags]
     respond_to do |format|
       if @consumer.update_attributes(params[:consumer])
+        tag.save
         format.html { redirect_to manager_consumer_path(@consumer), notice: 'Consumer was successfully updated.' }
         format.json { head :no_content }
       else
