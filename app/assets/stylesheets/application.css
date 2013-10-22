@@ -11,3 +11,38 @@
  *= require_self
  *= require_tree .
  */
+
+table a:link {
+  font-weight: bold;
+}
+
+table a:active,
+table a:hover {
+  color: #bd5a35;
+  text-decoration:underline;
+}
+
+table {
+  border:1px solid #CCC;
+}
+
+table th {
+  background: #EDEDED;
+}
+
+table tr {
+  text-align: center;
+}
+
+table td {
+  padding: 10px;
+  border-top: 1px solid #CCC;
+}
+
+table tr.even td {
+  background: #f6f6f6;
+}
+
+table tr:hover td {
+  background: #f2f2f2;
+}
