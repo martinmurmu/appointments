@@ -3,7 +3,7 @@ class Tag < ActiveRecord::Base
   belongs_to :manager
   belongs_to :consumer
 
-  attr_accessible :tags
+  attr_accessible :tags, :manager_id
 
   after_create :send_welcome_message
 
