@@ -22,6 +22,7 @@ class ReceiverController < ActionController::Base
 
     message = ""
 
+    # Cases
     case parsedMessage[0]
     when "Y"
       # Get data
@@ -54,6 +55,10 @@ class ReceiverController < ActionController::Base
       tag.destroy
 
       message = "No worries, you are off the list."
+    else
+      # Invalid response
+      logger.warn "Couldn't match with valid responses..."
+      return
     end
 
     # build up a response
