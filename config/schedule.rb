@@ -22,10 +22,10 @@
 # Consumer User receives text every 72 hours (between 8A-8P) indicating they are
 # on the waitlist, and asking if they want to remain on the list.
 
-set :environment, "development"
+set :environment, RAILS_ENV
 set :output, {:error => "log/cron_error.log", :standard => "log/cron_standard.log"}
 
-every 1.minute do
+every :day, :at => '4:00pm' do
   runner "Manager.notify_waitlists"
 end
 
