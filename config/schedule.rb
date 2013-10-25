@@ -22,7 +22,9 @@
 # Consumer User receives text every 72 hours (between 8A-8P) indicating they are
 # on the waitlist, and asking if they want to remain on the list.
 
-set :environment, RAILS_ENV
+require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+
+set :environment, Rails.env
 set :output, {:error => "log/cron_error.log", :standard => "log/cron_standard.log"}
 
 every :day, :at => '4:00pm' do
