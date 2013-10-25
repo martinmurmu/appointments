@@ -53,3 +53,4 @@ gem "devise"
 gem "cancan"
 
 gem "twilio-ruby"
+gem "whenever", :require => false

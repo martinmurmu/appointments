@@ -40,4 +40,14 @@ class Manager < ActiveRecord::Base
       #    )
     end
   end
+
+  def self.notify_waitlists
+    managers = self.all
+    managers.each do |manager|
+      manager.consumers.each do |consumer|
+        logger.debug "To #{consumer.phone_number} about #{manager.practice_name} waitlist."
+      end
+    end
+  end
+
 end
