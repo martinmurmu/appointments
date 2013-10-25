@@ -29,7 +29,7 @@ class Manager < ActiveRecord::Base
         logger.debug "Message: #{message}"
 
         client.account.sms.messages.create(
-          from: manager_practice_phone,
+          from: TWILIO_CONFIG['from'],
           to: consumer.phone_number,
           body: message
         )
