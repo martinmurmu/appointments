@@ -1,6 +1,14 @@
-<h1>Editing appointment</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', manager_appointment_path(@appointment) %> |
-<%= link_to 'Back', manager_appointments_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Editing appointment
+      </header>
+      <div class="panel-body">
+        <%= render 'form' %>
+      </div>
+    </section>
+    <%= link_to 'Show', manager_appointment_path(@appointment) %> |
+    <%= link_to 'Back', manager_appointments_path %>
+  </div>
+</div>

@@ -1,5 +1,14 @@
-<h1>New consumer</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        New consumer
+      </header>
+      <div class="panel-body">
+        <%= render 'form' %>
+      </div>
+    </section>
+    <%= link_to 'Back', manager_consumers_path %>
+  </div>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', manager_consumers_path %>

@@ -1,26 +1,37 @@
-<h1>Listing consumers</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <%= link_to 'New Consumer', new_manager_consumer_path %>
+  </div>
+  <br />
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Listing consumers
+      </header>
+      <table class="table table-striped table-advance table-hover">
+        <thead>
+          <tr>
+            <th>Phone</th>
+            <th>Tags</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @consumers.each do |consumer| %>
+            <tr>
+              <td><%= consumer.phone_number %></td>
+              <!-- TODO: This can be expensive -->
+              <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
+              <td><%= link_to 'Show', manager_consumer_path(consumer) %></td>
+              <td><%= link_to 'Edit', edit_manager_consumer_path(consumer) %></td>
+              <td><%= link_to 'Destroy', manager_consumer_path(consumer), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Phone</th>
-    <th>Tags</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @consumers.each do |consumer| %>
-  <tr>
-    <td><%= consumer.phone_number %></td>
-    <!-- TODO: This can be expensive -->
-    <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
-    <td><%= link_to 'Show', manager_consumer_path(consumer) %></td>
-    <td><%= link_to 'Edit', edit_manager_consumer_path(consumer) %></td>
-    <td><%= link_to 'Destroy', manager_consumer_path(consumer), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Consumer', new_manager_consumer_path %>

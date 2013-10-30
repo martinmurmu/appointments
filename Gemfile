@@ -40,6 +40,10 @@ gem 'jquery-rails', '~> 2.0'
 
 gem "rspec-rails", :group => [:test, :development]
 
+group :development do
+  gem 'rails-dev-tweaks'
+end
+
 group :test do
   gem "factory_girl_rails"
   gem "capybara"

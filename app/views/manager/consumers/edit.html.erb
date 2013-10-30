@@ -1,6 +1,14 @@
-<h1>Editing consumer</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', manager_consumer_path(@consumer) %> |
-<%= link_to 'Back', manager_consumers_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Editing consumer
+      </header>
+      <div class="panel-body">
+        <%= render 'form' %>
+      </div>
+    </section>
+    <%= link_to 'Show', manager_consumer_path(@consumer) %> | 
+    <%= link_to 'Back', manager_consumers_path %>
+  </div>
+</div>
