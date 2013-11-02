@@ -1,4 +1,4 @@
-<%= form_for(@manager, :url => manager_profile_path, :method => 'put') do |f| %>
+<%= form_for([:manager, @manager], :url => manager_profile_path, :method => 'put', :html => {:class => "form-horizontal"}) do |f| %>
   <% if @manager.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@manager.errors.count, "error") %> prohibited this manager from being saved:</h2>
@@ -11,19 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "Name" %><br />
-    <%= f.text_field :practice_name %>
+  <div class="form-group">
+    <%= f.label "Name", :class => "col-lg-2 col-sm-2 control-label" %>
+    <div class="col-lg-6">
+      <%= f.text_field :practice_name, :class => "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label "Phone" %><br />
-    <%= f.text_field :practice_phone %>
+
+  <div class="form-group">
+    <%= f.label "Phone", :class => "col-lg-2 col-sm-2 control-label" %>
+    <div class="col-lg-6">
+      <%= f.text_field :practice_phone, :class => "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label "Address" %><br />
-    <%= f.text_field :practice_address %>
+
+  <div class="form-group">
+    <%= f.label "Address", :class => "col-lg-2 col-sm-2 control-label" %>
+    <div class="col-lg-6">
+      <%= f.text_field :practice_address, :class => "form-control" %>
+    </div>
   </div>
-  <div class="actions">
-    <%= submit_tag %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= submit_tag "Submit", :class => "btn btn-default" %>
+    </div>
   </div>
 <% end %>
+

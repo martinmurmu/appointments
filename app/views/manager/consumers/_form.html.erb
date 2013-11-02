@@ -44,9 +44,11 @@
     <%= f.label "Tags", :class => "col-lg-2 col-sm-2 control-label" %>
     <div class="col-lg-8">
       <% if (@consumer.new_record?) %>
-        <%= text_field_tag :tags, "", :class => "form-control" %>
+        <%= text_field_tag :tags, "", 
+          :id => "tagsinput", :class => "tagsinput" %>
       <% else %>
-        <%= text_field_tag :tags, @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags, :class => "form-control" %>
+        <%= text_field_tag :tags, @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags, 
+          :id => "tagsinput", :class => "tagsinput" %>
       <% end %>
     </div>
   </div>
@@ -57,3 +59,4 @@
     </div>
   </div>
 <% end %>
+
