@@ -65,6 +65,10 @@ Appointments::Application.routes.draw do
 #    :sessions => "admin/sessions"
 #  }
 
+  devise_for :manager, :class_name => "User" do 
+    get '/manager/sign_out' => 'devise/sessions#destroy'
+  end
+
   devise_for :manager, :class_name => "User", :controllers => {
     :registrations => "manager/registrations"
   }
