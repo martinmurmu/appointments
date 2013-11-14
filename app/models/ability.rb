@@ -31,15 +31,20 @@ class Ability
 
     @user = user || User.new # for guest
 
-    if @user.role.nil? || @user.role == ""
+    if @user.rolable_type.nil? || @user.rolable_type == ""
       can :create, :session  # for guest without roles
     else
-      send(@user.role)
+      send(@user.rolable_type.downcase.to_sym)
     end
   end
 
   def manager
     can :manage, Appointment
+    can :manage, Manager
+    can :manage, Consumer
+    can :manage, Tag
+    can :manage, Pin
+    can :manage, Message
   end
 
   def admin
