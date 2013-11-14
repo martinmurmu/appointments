@@ -1,5 +1,7 @@
 class Manager::ConsumersController < ManagerController
 
+  load_and_authorize_resource
+
   # GET /manager/consumers
   # GET /manager/consumers.json
   def index

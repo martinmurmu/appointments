@@ -1,5 +1,7 @@
 class Manager::AppointmentsController < ManagerController
 
+  load_and_authorize_resource
+
   # GET /manager/appointments
   # GET /manager/appointments.json
   def index
