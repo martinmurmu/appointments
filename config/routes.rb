@@ -102,5 +102,5 @@ Appointments::Application.routes.draw do
   # Consumer's messages will go to this route.
   post 'sms' => 'receiver#parse'
 
-  mount_browsercms
+#  mount_browsercms
 end
