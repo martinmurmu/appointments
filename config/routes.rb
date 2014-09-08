@@ -16,6 +16,8 @@ Appointments::Application.routes.draw do
     root :to => 'home#index'
     get 'profile' => 'profiles#edit'
     put 'profile' => 'profiles#update'
+    post 'home/appointments' => 'home#appointments'
+    post 'home/consumer' => 'home#consumer'
     resources :appointments do
       member do
         get 'consumers'

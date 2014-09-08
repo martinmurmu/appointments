@@ -51,10 +51,7 @@ class Manager::AppointmentsController < ManagerController
     @appointment.manager = current_manager.rolable
 
     notice = "Well done! You have broadcasted a message to your Waitlist. You'll get a phone call from the first patient to respond!"
-  
-    p 222222222222222222222222222222222
-    p @appointment
-    p 333333333333333333333333333333333
+    
     respond_to do |format|
       if @appointment.save
         format.html { redirect_to manager_appointments_path, notice: notice }

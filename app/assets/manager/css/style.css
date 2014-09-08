@@ -4098,5 +4098,9 @@ span.customSelect.changed {
     text-decoration: underline;
 }
 
+.flash-notice {
+	color: #FCB322;
+}
+
 
 

@@ -23,4 +23,54 @@ class Manager::HomeController < ManagerController
       @consumer = Consumer.new
     end
   end
+  
+  def appointments
+    @appointment = Appointment.new(params[:appointment])
+    str_datetime = params[:datetime].to_datetime
+    # @appointment.date = DateTime.strptime(params[:appointment][:datetime], "%m-%d-%Y")
+    @appointment.date = str_datetime
+    @appointment.time = str_datetime
+    @appointment.manager = current_manager.rolable
+
+    respond_to do |format|
+      p 1111111111111111111111111
+      p @appointment
+      p 2222222222222222222222222
+      if @appointment.save
+        notice = "Well done! You have broadcasted a message to your Waitlist."
+        flash[:appointments_notice] = notice
+        format.html { redirect_to manager_root_path }
+        format.json { render json: manager_root_path(@appointment), status: :created, location: @appointment }
+      else
+        notice = "Not created! Please retry."
+        flash[:appointments_notice] = notice
+        format.html { redirect_to manager_root_path }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def consumer
+    @consumer = Consumer.where(params[:consumer]).create
+    @consumer.phone_number = params[:consumer][:phone_number].delete(" ")
+
+    respond_to do |format|
+      if @consumer.save
+        @consumer.tags.create(
+          :manager_id => current_manager.rolable.id,
+          :tags => params[:tags]
+        )
+        notice = "Well done! This patient has been waitlisted and will receive your broadcasts."
+        flash[:consumer_notice] = notice
+        logger.debug @consumer
+        format.html { redirect_to manager_root_path}
+        format.json { render json: manager_root_path, status: :created, location: @consumer }
+      else
+        notice = "Not created! Please retry."
+        flash[:consumer_notice] = notice
+        format.html { redirect_to manager_root_path}
+        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end
