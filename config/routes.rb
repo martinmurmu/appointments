@@ -20,6 +20,7 @@ Appointments::Application.routes.draw do
     post 'home/consumer' => 'home#consumer'
     resources :appointments do
       member do
+        get 'new' => 'appointments#new'
         get 'consumers'
         put 'rebroadcast' => 'appointments#rebroadcast'
         put 'enable' => 'appointments#enable'

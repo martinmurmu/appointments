@@ -33,9 +33,6 @@ class Manager::HomeController < ManagerController
     @appointment.manager = current_manager.rolable
 
     respond_to do |format|
-      p 1111111111111111111111111
-      p @appointment
-      p 2222222222222222222222222
       if @appointment.save
         notice = "Well done! You have broadcasted a message to your Waitlist."
         flash[:appointments_notice] = notice
