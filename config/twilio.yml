@@ -2,3 +2,7 @@ development:
   from: "+1 415-599-2671"
   sid: "AC1549d260a3183f9c5ee101ba9d610ea6"
   token: "7df107057f01083e8ca68034518c1c18"
+production:
+  from: "+1 404-620-6787"
+  sid: "AC1549d260a3183f9c5ee101ba9d610ea6"
+  token: "7df107057f01083e8ca68034518c1c18"
