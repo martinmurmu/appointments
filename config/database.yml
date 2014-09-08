@@ -5,7 +5,7 @@ development:
   database: appointments_development
   pool: 5
   username: root
-  password: 
+  password: br5x1n0f
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -18,16 +18,16 @@ test:
   database: appointments_test
   pool: 5
   username: root
-  password: 
+  password: br5x1n0f
   host: localhost
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: appointments_development
+  database: appointments_production
   pool: 5
   username: root
-  password: 
+  password: br5x1n0f
   host: localhost
 
