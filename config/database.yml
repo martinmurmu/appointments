@@ -28,6 +28,6 @@ production:
   database: appointments_production
   pool: 5
   username: root
-  password: mysql
+  password: br5x1n0f
   host: localhost
 
