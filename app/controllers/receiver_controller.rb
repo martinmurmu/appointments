@@ -40,12 +40,12 @@ class ReceiverController < ActionController::Base
       pin.consumer = consumer
 
       if pin.save
-        if appointment.is_open?
-          appointment.update_attributes!(:status => "closed", :assigned_pin => pin.pin)
+        if appointment.is_broadcasted?
+          appointment.update_attributes!(:status => "Filled", :assigned_pin => pin.pin)
           message = "You are tentatively confirmed. Please call #{manager_phone_number} and provide pin #{pin.pin}"
         else
           message = "Sorry! You did not get the slot. The good news is the waitlist is moving!"
-          message += " You can stay on the list or reply 'X #{manager.id}' to be removed from the list."
+          message += " You can stay on the list or reply 'X #{manager.id}' to be removed from it."
         end
       end
     when "X"

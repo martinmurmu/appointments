@@ -7,9 +7,16 @@ class Manager < ActiveRecord::Base
   has_many :pins, :through => :appointments
   has_many :consumers, :through => :tags
 
-  attr_accessible :practice_name, :practice_phone, :practice_address
+  attr_accessible :practice_name, :practice_phone, :practice_address, :token
 
   validates :practice_name, :practice_phone, :practice_address, :presence => true
+
+  # before_create :generate_token_seo
+  before_save :generate_token_seo
+
+  def to_s
+    practice_name
+  end
 
   def self.notify_waitlists
     managers = self.all
@@ -36,6 +43,19 @@ class Manager < ActiveRecord::Base
       end
     end
 
+  end
+
+  private
+  
+  def generate_token_hash
+    begin
+      self.token = SecureRandom.hex
+    end while self.class.exists?(token: self.token)
+  end
+
+  def generate_token_seo
+    self.token = self.practice_name + "-" + self.practice_address
+    self.token = self.token.delete(",.").gsub(/ /, "-")
   end
 
 end

@@ -23,6 +23,7 @@ class Tag < ActiveRecord::Base
     logger.debug "To: #{self.consumer.phone_number}"
     logger.debug "Message: #{message}"
 
+    return 
     sms = client.account.sms.messages.create(
       from: TWILIO_CONFIG['from'],
       to: self.consumer.phone_number,

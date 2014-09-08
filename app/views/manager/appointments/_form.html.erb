@@ -11,22 +11,16 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <%= f.label :title, :class => "col-lg-2 col-sm-2 control-label" %>
     <div class="col-lg-8">
       <%= f.text_field :title, :class => "form-control" %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :description, :class => "col-lg-2 col-sm-2 control-label" %>
-    <div class="col-lg-8">
-      <%= f.text_area :description, :rows => "5", :class => "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
     <%= f.label :date, :class => "col-lg-2 col-sm-2 control-label" %>
-    <div class="col-lg-4">
-      <%= f.date_select :date, :class => "form-control" %>
+    <div class="col-lg-2">
+      <%= f.text_field :date, :id => "dp1", :class => "form-control" %>
     </div>
   </div>
   <div class="form-group">
@@ -34,13 +28,43 @@
     <div class="col-lg-4">
       <%= f.time_select :time, :class => "form-control" %>
     </div>
+  </div>-->
+
+  <div class="form-group">
+      <%= f.label :date, :class => "col-lg-2 col-sm-2 control-label" %>
+      <div class="col-md-4">
+          <div class="input-group date form_datetime-meridian">
+              <input type="text" name="datetime" 
+                class="form-control" readonly="" size="16" value="<%= @appointment.get_datetime %>">
+              <div class="input-group-btn">
+                  <button type="button" class="btn btn-info date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Comments", :class => "col-lg-2 col-sm-2 control-label" %>
+    <div class="col-lg-8">
+      <%= f.text_area :description, :rows => "5", :class => "form-control" %>
+    </div>
   </div>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit "Submit", :class => "btn btn-default" %>
+      <%= f.submit "Broadcast Open Time Slot", :class => "btn btn-default" %>
     </div>
   </div>
 <% end %>
 
+<script type="text/javascript">
 
+$(window).load(function() {
+    $(".form_datetime-meridian").datetimepicker({
+        format: "MM d, yyyy - H:ii P",
+        showMeridian: true,
+        autoclose: true,
+        todayBtn: true
+    });
+});
 
+</script>

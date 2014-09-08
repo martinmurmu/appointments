@@ -46,8 +46,4 @@ class Ability
     can :manage, Pin
     can :manage, Message
   end
-
-  def admin
-    can :manage, :all
-  end
 end

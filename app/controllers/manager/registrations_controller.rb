@@ -4,8 +4,11 @@ class Manager::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  # POST /resource
+  # POST
   def create
+    logger.debug "Manager's registration..."
+    logger.debug params
+
     build_resource(params[:manager])
 
     # Creates a new Manager related to this User
@@ -37,8 +40,6 @@ class Manager::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  # The default url to be used after updating a resource. You need to overwrite
-  # this method in your own RegistrationsController.
   def after_update_path_for(resource)
     manager_root_path
   end

@@ -44,11 +44,20 @@ class Manager::AppointmentsController < ManagerController
   # POST /manager/appointments.json
   def create
     @appointment = Appointment.new(params[:appointment])
+    str_datetime = params[:datetime].to_datetime
+    # @appointment.date = DateTime.strptime(params[:appointment][:datetime], "%m-%d-%Y")
+    @appointment.date = str_datetime
+    @appointment.time = str_datetime
     @appointment.manager = current_manager.rolable
 
+    notice = "Well done! You have broadcasted a message to your Waitlist. You'll get a phone call from the first patient to respond!"
+  
+    p 222222222222222222222222222222222
+    p @appointment
+    p 333333333333333333333333333333333
     respond_to do |format|
       if @appointment.save
-        format.html { redirect_to manager_appointment_path(@appointment), notice: 'Appointment was successfully created.' }
+        format.html { redirect_to manager_appointments_path, notice: notice }
         format.json { render json: manager_appointment_path(@appointment), status: :created, location: @appointment }
       else
         format.html { render action: "new" }
@@ -61,9 +70,14 @@ class Manager::AppointmentsController < ManagerController
   # PUT /manager/appointments/1.json
   def update
     @appointment = Appointment.find(params[:id])
+    str_datetime = params[:datetime].to_datetime
+    # @appointment.date = DateTime.strptime(params[:appointment][:datetime], "%m-%d-%Y")
+    @appointment.date = str_datetime
+    @appointment.time = str_datetime
+    @appointment.description = params[:appointment][:description]
 
     respond_to do |format|
-      if @appointment.update_attributes(params[:appointment])
+      if @appointment.save()
         format.html { redirect_to manager_appointment_path(@appointment), notice: 'Appointment was successfully updated.' }
         format.json { head :no_content }
       else
@@ -73,15 +87,45 @@ class Manager::AppointmentsController < ManagerController
     end
   end
 
+  # PUT /manager/appointments/1/enable
+  def enable
+    appointment = Appointment.find(params[:id])
+    appointment.enable
+    appointment.set_broadcasted
+
+    respond_to do |format|
+      if appointment.save
+        format.html { redirect_to manager_appointments_path, notice: 'The slot was successfully enabled.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to manager_appointments_path, alert: 'Error trying to enable the slot.' }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /manager/appointments/1
   # DELETE /manager/appointments/1.json
   def destroy
     @appointment = Appointment.find(params[:id])
-    @appointment.destroy
+
+    if @appointment.is_filled?
+      respond_to do |format|
+        format.html { redirect_to manager_consumers_path, alert: "You can't cancel the slot because it is already filled." }
+        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+      end
+    end
+    
+    @appointment.set_canceled
 
     respond_to do |format|
-      format.html { redirect_to manager_appointments_path }
-      format.json { head :no_content }
+      if @appointment.save
+        format.html { redirect_to manager_appointments_path, notice: 'The slot was successfully cancelled.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to manager_consumers_path, alert: 'Error trying to cancel the slot.' }
+        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -116,6 +160,21 @@ class Manager::AppointmentsController < ManagerController
       else
         format.html { render action: "addConsumer" }
         format.json { render json: consumer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /manager/appointments/:id/rebroadcast
+  def rebroadcast
+    appointment = Appointment.find(params[:id])
+    
+    respond_to do |format|
+      if !appointment.is_canceled?
+        # This method calls send_message_to_consumers
+        appointment.set_broadcasted
+        format.html { redirect_to manager_appointments_path, notice: "Rebroadcast done!" }
+      else
+        format.html { redirect_to manager_appointments_path, alert: "You only can rebroadcast non filled slots!" }
       end
     end
   end

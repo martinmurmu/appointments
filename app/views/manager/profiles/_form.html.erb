@@ -12,6 +12,14 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label "Link", :class => "col-lg-2 col-sm-2 control-label" %>
+    <div class="col-lg-6">
+      <% link = root_path + ['waitlist', @manager.token].join("/") %>
+      <h5><%= link_to link, link, :target => "_blank" %></h5>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label "Name", :class => "col-lg-2 col-sm-2 control-label" %>
     <div class="col-lg-6">
       <%= f.text_field :practice_name, :class => "form-control" %>

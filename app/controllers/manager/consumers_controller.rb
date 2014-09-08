@@ -15,7 +15,7 @@ class Manager::ConsumersController < ManagerController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @consumers }
     end
   end
@@ -51,17 +51,19 @@ class Manager::ConsumersController < ManagerController
   # POST /manager/consumers.json
   # TODO Check if this must be done in another action
   def create
-    @consumer = Consumer.where(params[:consumer]).first_or_create
-    @consumer.tags.create(
-      :manager_id => current_manager.rolable.id,
-      :tags => params[:tags]
-    )
+    @consumer = Consumer.where(params[:consumer]).create
+    @consumer.phone_number = params[:consumer][:phone_number].delete(" ")
 
     respond_to do |format|
       if @consumer.save
+        @consumer.tags.create(
+          :manager_id => current_manager.rolable.id,
+          :tags => params[:tags]
+        )
+
         logger.debug @consumer
-        format.html { redirect_to manager_consumer_path(@consumer), notice: 'Consumer was successfully created.' }
-        format.json { render json: manager_consumer_path(@consumer), status: :created, location: @consumer }
+        format.html { redirect_to manager_consumers_path, notice: 'Well done! This patient has been waitlisted and will receive your broadcasts.' }
+        format.json { render json: manager_consumers_path, status: :created, location: @consumer }
       else
         format.html { render action: "new" }
         format.json { render json: @consumer.errors, status: :unprocessable_entity }
@@ -87,15 +89,35 @@ class Manager::ConsumersController < ManagerController
     end
   end
 
+  # PUT /manager/consumers/1/enable
+  def enable
+    consumer = Consumer.find(params[:id])
+    consumer.enable
+    respond_to do |format|
+      if consumer.save
+        format.html { redirect_to manager_consumers_path, notice: 'Consumer was successfully enabled.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to manager_consumers_path, notice: 'Error trying to enable the Consumer.' }
+        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /manager/consumers/1
   # DELETE /manager/consumers/1.json
   def destroy
     @consumer = Consumer.find(params[:id])
-    @consumer.destroy
+    @consumer.disable
 
     respond_to do |format|
-      format.html { redirect_to manager_consumers_path }
-      format.json { head :no_content }
+      if @consumer.save
+        format.html { redirect_to manager_consumers_path, notice: 'Consumer was successfully removed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to manager_consumers_path, notice: 'Error trying to disable the Consumer' }
+        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

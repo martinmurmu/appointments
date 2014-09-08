@@ -6,9 +6,21 @@ class Consumer < ActiveRecord::Base
   has_many :managers, :through => :appointments
   has_many :managers, :through => :tags
 
-  attr_accessible :phone_number
+  attr_accessible :phone_number, :enabled
 
-  validates :phone_number, :presence => true
-  validates :phone_number, :uniqueness => true
+  validates :phone_number, :presence => true,
+                           :length => { :minimum => 10, :maximum => 15 }
+
+  def to_s
+    phone_number
+  end
+
+  def enable
+    self.enabled = true
+  end
+
+  def disable
+    self.enabled = false
+  end  
 end
 

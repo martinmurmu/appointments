@@ -34,9 +34,12 @@
 
   <div class="form-group">
     <%= f.label "Phone", :class => "col-lg-2 col-sm-2 control-label" %>
-    <div class="col-lg-8">
-      <%= f.text_field :phone_number, :class => "form-control input-lg" %>
-      <p class="help-block">Some help about formats...</p>
+    <div class="input-group col-lg-8">
+      <!--<span class="input-group-addon">+1</span>
+      <%= f.text_field :phone_number, :class => "form-control input-lg", :placeholder => "+1 415 599 2671" %>
+      <p class="help-block">(ex. +1 415 599 2671)</p-->
+      <%= f.text_field :phone_number, :class => "form-control", :data => { :mask => "+1 999 999 9999"} %>
+      <span class="help-inline">+1 999 999 9999</span>
     </div>
   </div>
 
@@ -45,12 +48,15 @@
     <div class="col-lg-8">
       <% tags = (@consumer.new_record?) ? "" : @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %>
       <%= text_field_tag :tags, tags, :id => "tagsinput", :class => "tagsinput" %>
+      <p class="help-block">
+        Add a tag like "urgent" or "new patient" to help you remember the patient or appt. desired.
+      </p>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit "Submit", :class => "btn btn-default" %>
+      <%= f.submit "Add to Waitlist", :class => "btn btn-default" %>
     </div>
   </div>
 <% end %>

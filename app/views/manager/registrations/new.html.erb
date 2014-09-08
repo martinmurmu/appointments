@@ -5,20 +5,27 @@
 
     <p>Enter your personal details below</p>
 
-    <input type="text" class="form-control" name="practice_name" placeholder="Practice name" autofocus>
-    <input type="text" class="form-control" name="practice_address" placeholder="Practice address" autofocus>
-    <input type="text" class="form-control" name="practice_phone" placeholder="Practice phone" autofocus>
+    <input type="text" class="form-control" name="practice_name" 
+      placeholder="Practice name" autofocus required />
+    <input type="text" class="form-control" name="practice_address" 
+      placeholder="Practice address" autofocus required />
+    <input type="text" class="form-control" name="practice_phone" 
+      placeholder="Practice phone" autofocus required />
 
     <p> Enter your account details below</p>
 
-    <%= f.text_field :email, :class => "form-control", :placeholder => "Email", :autofocus => true %>
+    <%= f.text_field :email, :class => "form-control", :placeholder => "Email", 
+      :autofocus => true, :required => true %>
 
-    <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+    <%= f.password_field :password, :class => "form-control", 
+      :placeholder => "Password", :required => true %>
 
-    <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Re-type Password" %>
+    <%= f.password_field :password_confirmation, :class => "form-control", 
+      :placeholder => "Re-type Password", :required => true %>
 
     <label class="checkbox">
-        <input type="checkbox" value="agree this condition"> I agree to the Terms of Service and Privacy Policy
+        <input type="checkbox" value="agree this condition" checked="checked" required /> 
+        I agree to the Terms of Service and Privacy Policy
     </label>
 
     <div><%= f.submit "Sign up", :class => "btn btn-lg btn-login btn-block" %></div>

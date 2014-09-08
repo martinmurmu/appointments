@@ -20,7 +20,7 @@ var Script = function () {
 
     $("#barchart").sparkline([5,3,6,7,5,6,4,2,3,4,6,8,9,10,8,6,5,7,6,5,4,7,4], {
         type: 'bar',
-        height: '90',
+        height: '65',
         barWidth: 8,
         barSpacing: 5,
         barColor: '#fff'

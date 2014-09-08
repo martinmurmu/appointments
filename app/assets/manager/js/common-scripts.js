@@ -1,26 +1,13 @@
+/*---LEFT BAR ACCORDION----*/
+
+
 var Script = function () {
 
-
-
-//    sidebar dropdown menu
+//    sidebar dropdown menu auto scrolling
 
     jQuery('#sidebar .sub-menu > a').click(function () {
-        var last = jQuery('.sub-menu.open', $('#sidebar'));
-        last.removeClass("open");
-        jQuery('.arrow', last).removeClass("open");
-        jQuery('.sub', last).slideUp(200);
-        var sub = jQuery(this).next();
-        if (sub.is(":visible")) {
-            jQuery('.arrow', jQuery(this)).removeClass("open");
-            jQuery(this).parent().removeClass("open");
-            sub.slideUp(200);
-        } else {
-            jQuery('.arrow', jQuery(this)).addClass("open");
-            jQuery(this).parent().addClass("open");
-            sub.slideDown(200);
-        }
         var o = ($(this).offset());
-        diff = 200 - o.top;
+        diff = 250 - o.top;
         if(diff>0)
             $("#sidebar").scrollTo("-="+Math.abs(diff),500);
         else
@@ -28,7 +15,6 @@ var Script = function () {
     });
 
 //    sidebar toggle
-
 
     $(function() {
         function responsiveView() {
@@ -47,19 +33,19 @@ var Script = function () {
         $(window).on('resize', responsiveView);
     });
 
-    $('.icon-reorder').click(function () {
+    $('.fa-bars').click(function () {
         if ($('#sidebar > ul').is(":visible") === true) {
             $('#main-content').css({
                 'margin-left': '0px'
             });
             $('#sidebar').css({
-                'margin-left': '-180px'
+                'margin-left': '-210px'
             });
             $('#sidebar > ul').hide();
             $("#container").addClass("sidebar-closed");
         } else {
             $('#main-content').css({
-                'margin-left': '180px'
+                'margin-left': '210px'
             });
             $('#sidebar > ul').show();
             $('#sidebar').css({
@@ -70,24 +56,24 @@ var Script = function () {
     });
 
 // custom scrollbar
-    $("#sidebar").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '3', cursorborderradius: '10px', background: '#404040', cursorborder: ''});
+    $("#sidebar").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
 
-    $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', cursorborder: '', zindex: '1000'});
+    $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
 
 // widget tools
 
-    jQuery('.panel .tools .icon-chevron-down').click(function () {
+    jQuery('.panel .tools .fa-chevron-down').click(function () {
         var el = jQuery(this).parents(".panel").children(".panel-body");
-        if (jQuery(this).hasClass("icon-chevron-down")) {
-            jQuery(this).removeClass("icon-chevron-down").addClass("icon-chevron-up");
+        if (jQuery(this).hasClass("fa-chevron-down")) {
+            jQuery(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
             el.slideUp(200);
         } else {
-            jQuery(this).removeClass("icon-chevron-up").addClass("icon-chevron-down");
+            jQuery(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
             el.slideDown(200);
         }
     });
 
-    jQuery('.panel .tools .icon-remove').click(function () {
+    jQuery('.panel .tools .fa-times').click(function () {
         jQuery(this).parents(".panel").parent().remove();
     });
 
@@ -113,16 +99,6 @@ var Script = function () {
             }, 2000)
         })
     }
-
-
-//custom select box
-
-//    $(function(){
-//
-//        $('select.styled').customSelect();
-//
-//    });
-
 
 
 }();

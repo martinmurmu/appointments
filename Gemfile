@@ -21,6 +21,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "font-awesome-rails"
 gem 'jquery-rails', '~> 2.0'
 
 # To use ActiveModel has_secure_password
@@ -30,7 +31,7 @@ gem 'jquery-rails', '~> 2.0'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -51,10 +52,16 @@ group :test do
   gem "cucumber"
 end
 
-gem "browsercms", "3.5.7"
+# gem "browsercms", "3.5.7"
 
-gem "devise"
+gem "devise", "2.2.3"
 gem "cancan"
 
 gem "twilio-ruby"
 gem "whenever", :require => false
+
+gem "activeadmin", "0.6.2"
+gem "meta_search",    '>= 1.1.0.pre'
+gem "delayed_job_active_record"
+gem "daemons"
+gem "god"

@@ -23,18 +23,13 @@
             </div>
           </div>
         <% end %>
-        <div class="form-group">
+<!--         <div class="form-group">
           <label class="col-lg-2 control-label">Title</label>
           <div class="col-lg-10">
             <p class="form-control-static"><%= @appointment.title %></p>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Description</label>
-          <div class="col-lg-10">
-            <p class="form-control-static"><%= @appointment.description %></p>
-          </div>
-        </div>
+ -->        
         <div class="form-group">
           <label class="col-lg-2 control-label">Date</label>
           <div class="col-lg-4">
@@ -47,6 +42,12 @@
             <p class="form-control-static">
                 <%= @appointment.time.strftime("%I:%M%p") %>
             </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Comments</label>
+          <div class="col-lg-10">
+            <p class="form-control-static"><%= @appointment.description %></p>
           </div>
         </div>
         <div class="form-group">
