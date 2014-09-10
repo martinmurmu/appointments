@@ -258,7 +258,7 @@ ul.sidebar-menu li a{
     transition: all 0.3s ease;
 }
 
-ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
+ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
     background: #35404d;
     color: #fff;
     display: block;
@@ -282,7 +282,7 @@ ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
     color: #FF6C60;
 }
 
-ul.sidebar-menu li.active a i {
+ul.sidebar-menu li a.active i {
     color: #FF6C60;
 }
 
@@ -309,7 +309,7 @@ ul.sidebar-menu li.active a i {
     width: 0;
 }
 
-#sidebar ul > li.active > a .arrow, #sidebar ul > li > a:hover .arrow, #sidebar ul > li > a:focus .arrow {
+#sidebar ul > li a.active > a .arrow, #sidebar ul > li > a:hover .arrow, #sidebar ul > li > a:focus .arrow {
     float: right;
     margin-top: 6px;
     margin-right: 10px;
@@ -320,7 +320,7 @@ ul.sidebar-menu li.active a i {
     border-bottom: 4px solid transparent;
 }
 
-#sidebar > ul > li.active > a .arrow.open, #sidebar > ul > li > a:hover .arrow.open, #sidebar > ul > li > a:focus .arrow.open {
+#sidebar > ul > li a.active > a .arrow.open, #sidebar > ul > li > a:hover .arrow.open, #sidebar > ul > li > a:focus .arrow.open {
     float: right;
     margin-top: 8px;
     margin-right: 10px;
@@ -473,17 +473,17 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .dropdown-menu.extended li p.green {
-    background-color: #a9d86e;
+    background-color: $panel_greenway;
     color: #fff;
 }
 
 .dropdown-menu.extended li p.red {
-    background-color: #ff6c60;
+    background-color: $panel_red;
     color: #fff;
 }
 
 .dropdown-menu.extended li p.yellow {
-    background-color: #fcb322;
+    background-color: $panel_orange;
     color: #fff;
 }
 
@@ -1145,15 +1145,15 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .badge.bg-success {
-    background: #a9d86e;
+    background: $panel_greenway;
 }
 
 .badge.bg-warning {
-    background: #FCB322;
+    background: $panel_orange;
 }
 
 .badge.bg-important {
-    background: #ff6c60;
+    background: $panel_red;
 }
 
 .badge.bg-info {
@@ -4104,5 +4104,11 @@ span.customSelect.changed {
 	color: #FCB322;
 }
 
+.btn-success {
+	background: $panel_greenway;
+	border-color: $panel_greenway;
+}
 
-
+.logo img {
+   	width: 50%;
+}
