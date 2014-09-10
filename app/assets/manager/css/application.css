@@ -10,13 +10,9 @@
  *
  *= require_self
  *= require font-awesome
- *= require ../assets/bootstrap-wysihtml5/bootstrap-wysihtml5
- *= require ../assets/bootstrap-datepicker/css/datepicker
- *= require ../assets/bootstrap-timepicker/compiled/timepicker
- *= require ../assets/bootstrap-colorpicker/css/colorpicker
- *= require ../assets/bootstrap-daterangepicker/daterangepicker-bs3
- *= require ../assets/bootstrap-datetimepicker/css/datetimepicker
- *= require ../assets/jquery-multi-select/css/multi-select.css
  *= require ../assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css
- *= require_tree .
+ *= require ./bootstrap.min.css
+ *= require ./bootstrap-reset.css
+ *= require ./style.css
+ *= require ./style-responsive.css
  */
