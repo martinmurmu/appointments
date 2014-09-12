@@ -1,0 +1,19 @@
+<div class="main-content">
+  <div class="row">
+  	<div class="col-lg-4"></div>
+  	<div class="col-lg-4">
+  		<div class="signin-form">
+  			<img class="logo" src="/assets/img/mywaitlist.svg">
+			<%= form_for(@consumer, :url => {:action => 'new_consumer'}) do |f| %>
+			  <%= f.text_field :user_name, :value=> @username, :autofocus => true, :class=>"form-control round-input email-input" %>
+			  <%= f.phone_field :phone_number, :class=>"form-control round-input phone-input" %>
+			  
+			  <div><%= f.submit "Join Waitlist", :class=>"submit"%></div>
+			  
+			  <div><label>"By submitting, you agree to the terms and conditions.</label></div>
+		      </div>
+			<% end %>			
+		</div>
+	</div>
+  </div>
+</div>

@@ -1,12 +1,24 @@
 Appointments::Application.routes.draw do
 
+  get "join/index"
+
+  devise_for :users
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   root :to => 'home#index'
 
+  # Join to waitlist
+  get '/:token', to: redirect('/users/sign_in')
+  post '/:token/join-waitlist' => 'waitlist#index'
+  get '/join' => 'join#index'
+  get '/waitlist' => 'waitlist#index'
   get '/waitlist/:token' => 'waitlist#show'
   post '/waitlist/:token/consumers' => 'waitlist#new_consumer'
+  
+  # lgoin and waitlist
+  get '/login' , to: redirect('/users/sign_in')
 
   devise_for :manager, :class_name => "User", :controllers => {
     :registrations => "manager/registrations"

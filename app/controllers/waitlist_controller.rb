@@ -1,4 +1,14 @@
 class WaitlistController < ApplicationController
+  def index
+    @consumer = Consumer.new
+    @username = params[:token]
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @consumer }
+    end
+  end
+  
   def show
     @manager = Manager.where(:token => params[:token]).first
 

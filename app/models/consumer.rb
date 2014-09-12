@@ -10,7 +10,10 @@ class Consumer < ActiveRecord::Base
 
   validates :phone_number, :presence => true,
                            :length => { :minimum => 10, :maximum => 15 }
-
+  
+  # define attributes and accessors
+  attr_accessor :user_name
+  
   def to_s
     phone_number
   end

@@ -1,0 +1,103 @@
+
+$panel_greenway: #78b943;
+$panel_blue: #1993d0;
+$panel_red: #d64351;
+$panel_orange: #e89124;
+$panel_purple: #614c9f;
+
+.main-content {
+  background: image-url('blurred.jpg') no-repeat;
+  width: 1400px;
+  height: 900px; 
+  
+  section {
+    margin-top: 100px;
+  }
+}
+
+.signin-form {
+  margin-top: 150px;
+  
+  form {
+    margin-top: 30px;  
+  }
+  
+  input {
+    width: 66%;
+    height: 45px;
+  }
+  
+  img.logo {
+    width: 66%;
+  }
+  
+  .round-input {
+    -webkit-border-radius: 30px; 
+    -moz-border-radius: 30px; 
+    border-radius: 30px; 
+    margin: 15px 0;
+    width: 66%;
+    padding-left: 70px;
+    font-size: 16px;
+    border-color: #777;
+  }
+  
+  .email-input {
+    background: #777 image-url('icon-user.png') no-repeat;
+  }
+  
+  .passwd-input {
+    background: transparent image-url('icon-key.png') no-repeat;
+    border: 2px solid #fff;
+  }
+  
+  .phone-input {
+    background: transparent image-url('icon-key.png') no-repeat;
+    border: 2px solid #fff;
+  }
+  
+  .link {
+    width: 66%;
+    text-align: center;
+    margin: 20px 5px;
+  }
+  
+  .submit {
+    background: $panel_blue;
+    font-size: 16px;
+  }
+  
+  input.submit:hover {
+    background: $panel_blue;
+  }
+  
+  label {
+    font-size: 9px;
+    color: #fff;
+    font-weight: 400;
+    margin: 10px 90px;
+  }
+
+}
+
+.link-form {
+  
+  margin: 50px auto;
+  color: #fff;
+  
+  label {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 10px 90px;
+  }
+  
+  a.btn {
+    background: $panel_greenway;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    width: 66%;
+  }
+
+}
