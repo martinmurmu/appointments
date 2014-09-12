@@ -10,7 +10,6 @@ Appointments::Application.routes.draw do
   root :to => 'home#index'
 
   # Join to waitlist
-  get '/:token', to: redirect('/users/sign_in')
   post '/:token/join-waitlist' => 'waitlist#index'
   get '/join' => 'join#index'
   get '/waitlist' => 'waitlist#index'
@@ -19,7 +18,7 @@ Appointments::Application.routes.draw do
   
   # lgoin and waitlist
   get '/login' , to: redirect('/users/sign_in')
-
+  
   devise_for :manager, :class_name => "User", :controllers => {
     :registrations => "manager/registrations"
   }
@@ -53,5 +52,7 @@ Appointments::Application.routes.draw do
   end
 
   # Consumer's messages will go to this route.
-  post 'sms' => 'receiver#parse' 
+  post 'sms' => 'receiver#parse'
+  
+  get '/:token', to: redirect('/users/sign_in') 
 end
