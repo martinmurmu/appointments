@@ -5,10 +5,18 @@ $panel_red: #d64351;
 $panel_orange: #e89124;
 $panel_purple: #614c9f;
 
+
 .main-content {
-  background: image-url('blurred.jpg') no-repeat;
-  width: 1400px;
-  height: 900px; 
+  background: image-url('blurred.jpg');
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom:0;
+  right:0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
   
   section {
     margin-top: 100px;
