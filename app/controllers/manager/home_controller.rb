@@ -24,6 +24,7 @@ class Manager::HomeController < ManagerController
     end
   end
   
+  # Ajax request for creating appointment at home
   def appointments
     @appointment = Appointment.new(params[:appointment])
     str_datetime = params[:datetime].to_datetime
@@ -34,16 +35,11 @@ class Manager::HomeController < ManagerController
 
     respond_to do |format|
       if @appointment.save
-        notice = "Well done! You have broadcasted a message to your Waitlist."
-        flash[:appointments_notice] = notice
-        format.html { redirect_to manager_root_path }
-        format.json { render json: manager_root_path(@appointment), status: :created, location: @appointment }
+        @notice = "Well done! You have broadcasted a message to your Waitlist." 
       else
-        notice = "Not created! Please retry."
-        flash[:appointments_notice] = notice
-        format.html { redirect_to manager_root_path }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+        @notice = "Not created! Please retry."
       end
+      format.js
     end
   end
   
@@ -57,17 +53,11 @@ class Manager::HomeController < ManagerController
           :manager_id => current_manager.rolable.id,
           :tags => params[:tags]
         )
-        notice = "Well done! This patient has been waitlisted and will receive your broadcasts."
-        flash[:consumer_notice] = notice
-        logger.debug @consumer
-        format.html { redirect_to manager_root_path}
-        format.json { render json: manager_root_path, status: :created, location: @consumer }
+        @notice = "Well done! This patient has been waitlisted and will receive your broadcasts."
       else
-        notice = "Not created! Please retry."
-        flash[:consumer_notice] = notice
-        format.html { redirect_to manager_root_path}
-        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+        @notice = "Not created! Please retry."
       end
+      format.js
     end
   end
 end
