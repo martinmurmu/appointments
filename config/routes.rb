@@ -10,7 +10,8 @@ Appointments::Application.routes.draw do
   root :to => 'home#index'
 
   # Join to waitlist
-  post '/:token/join-waitlist' => 'waitlist#index'
+  get '/:token/join-waitlist' => 'waitlist#index', :as => 'join_waitlist'
+  get '/join-waitlist' => 'waitlist#index', :as => 'join_waitlist'
   get '/join' => 'join#index'
   get '/waitlist' => 'waitlist#index'
   get '/waitlist/:token' => 'waitlist#show'

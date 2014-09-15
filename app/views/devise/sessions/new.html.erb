@@ -1,14 +1,16 @@
 <div class="main-content">
   <div class="row">
   	<div class="col-lg-4"></div>
-  	<div class="col-lg-4">
+  	<div class="col-lg-4 form-content">
   		<div class="signin-form">
   			<img class="logo" src="/assets/img/mywaitlist.svg">
 			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+			  <i class="fa fa-user"></i>
 			  <%= f.email_field :email, :autofocus => true, :class=>"form-control round-input email-input" %>
+			  <i class="fa fa-lock"></i>
 			  <%= f.password_field :password, :class=>"form-control round-input passwd-input" %>
 			  
-			  <div><%= f.submit "Login", :class=>"submit"%></div>
+			  <div><%= f.submit "Login", :class=>"btn btn-round" %></div>
 			  
 			  <div class="link">
 			  <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
@@ -19,7 +21,7 @@
 		</div>
 		<div class="link-form">
 			<label>Interested?</label><br>
-			<%= link_to "JOIN OUT WAITLIST", new_password_path(resource_name), :class=>"btn btn-round" %><br />
+			<%= link_to "JOIN OUR WAITLIST", join_waitlist_path, :class=>"btn btn-round" %><br />
 		</div>
 	</div>
   </div>

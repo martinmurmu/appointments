@@ -1,6 +1,7 @@
 
 $panel_greenway: #78b943;
 $panel_blue: #1993d0;
+$panel_dark_blue: #2C5C8D;
 $panel_red: #d64351;
 $panel_orange: #e89124;
 $panel_purple: #614c9f;
@@ -21,10 +22,16 @@ $panel_purple: #614c9f;
   section {
     margin-top: 100px;
   }
+  
+  .form-content {
+    margin-left: 80px;
+  }
+  
 }
 
 .signin-form {
-  margin-top: 150px;
+  margin-top: 120px;
+  color: #E6E6E6;
   
   form {
     margin-top: 30px;  
@@ -33,6 +40,7 @@ $panel_purple: #614c9f;
   input {
     width: 66%;
     height: 45px;
+    position: relative;
   }
   
   img.logo {
@@ -45,45 +53,69 @@ $panel_purple: #614c9f;
     border-radius: 30px; 
     margin: 15px 0;
     width: 66%;
-    padding-left: 70px;
-    font-size: 16px;
-    border-color: #777;
+    padding-left: 50px;
+    font-size: 20px;
+    color: #E6E6E6;
   }
   
   .email-input {
-    background: #777 image-url('icon-user.png') no-repeat;
+    background: rgba(197, 196, 196, 0.5);
+    border-color: rgb(197, 196, 196);
+  }
+    
+  i { 
+    position:absolute; 
+    z-index: 2; 
+    padding: 8px 15px;
+    font-size: 30px;
+    color: #E4E4E4;
   }
   
-  .passwd-input {
-    background: transparent image-url('icon-key.png') no-repeat;
-    border: 2px solid #fff;
+  i.fa-mobile {
+    padding: 3px 15px;
+    font-size: 40px;
   }
   
   .phone-input {
-    background: transparent image-url('icon-key.png') no-repeat;
-    border: 2px solid #fff;
+    background: transparent;
+    border: 2px solid #c5c4c4;
   }
   
+  .passwd-input {
+    background: transparent;
+    border: 2px solid #c5c4c4;
+  }
+
   .link {
     width: 66%;
     text-align: center;
     margin: 20px 5px;
+    
+    a, a:link, a:visited {
+      color: #C5B7B7;
+    }
   }
   
-  .submit {
+  form input.btn.btn-round[type=submit] {
     background: $panel_blue;
     font-size: 16px;
   }
   
-  input.submit:hover {
-    background: $panel_blue;
+  form input.btn.btn-round[type=submit]:not(.disabled):active {
+    background: $panel_dark_blue;
+    color: #E6E6E6;
+  }
+  
+  form input.btn.btn-round[type=submit]:not(.disabled):hover {
+    background: $panel_dark_blue;
+    color: #E6E6E6;
   }
   
   label {
     font-size: 9px;
     color: #fff;
     font-weight: 400;
-    margin: 10px 90px;
+    margin: 10px 45px;
   }
 
 }
@@ -99,13 +131,25 @@ $panel_purple: #614c9f;
     margin: 10px 90px;
   }
   
-  a.btn {
-    background: $panel_greenway;
+  a.btn.btn-round {
     color: #fff;
     font-size: 20px;
     font-weight: 700;
     text-decoration: none;
     width: 66%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
+    background: $panel_greenway;
+    font-size: 16px;
+  }
+  
+  a.btn.btn-round:not(.disabled):active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
+    background: #5CA124;
+  }
+  
+  a.btn.btn-round:not(.disabled):hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
+    background: #46791C;
   }
 
 }
