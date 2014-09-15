@@ -41,13 +41,16 @@ def is_filled?
   end
 
   def set_broadcasted
+      logger.info "set_broadcasted"
     if self.is_filled?
       # self.pins.where(:pin => apt.assigned_pin)[0].delete
+      logger.info "is_filled"
       self.assigned_pin = ""
     end
 
     self.status = BROADCASTED
     if self.save
+      logger.info "is_save"
       self.send_message_to_consumers
     end
   end
@@ -92,7 +95,7 @@ def is_filled?
   end
 
   def send_message_to_consumers
-    logger.debug "Called send_message_to_consumers..."
+    logger.info "Called send_message_to_consumers..."
 #    Consumer Users are alerted in batches of 10. There will be a 10 minute lag 
 #    between notification sent to each 10 and if any one Consumer User repsonds 
 #    with Y, the next 10 will not be notified.
@@ -112,7 +115,7 @@ def is_filled?
 
     enabled_consumers = self.manager.consumers.where(:enabled => true)
 
-    logger.debug "Run broadcast!"
+    logger.info "Run broadcast!"
 
     count = 0
 
@@ -127,10 +130,10 @@ def is_filled?
       message += " Reply 'Y #{self.id}' to this text & we'll send a confirmation & booking! Slots go fast, please reply asap."
 
       # Create and send an SMS message. Message must be editable?
-      logger.debug "New slot message..."
-      logger.debug "From: #{TWILIO_CONFIG['from']}"
-      logger.debug "To: #{consumer.phone_number}"
-      logger.debug "Message: #{message}"
+      logger.info "New slot message..."
+      logger.info "From: #{TWILIO_CONFIG['from']}"
+      logger.info "To: #{consumer.phone_number}"
+      logger.info "Message: #{message}"
 
       # Send to 10 consumers then wait for 10 minutes
       if (count == 1)
@@ -138,20 +141,20 @@ def is_filled?
         count = 0
       end
 
-      # sms = client.account.sms.messages.create(
-      #   from: TWILIO_CONFIG['from'],
-      #   to: consumer.phone_number,
-      #   body: message
-      # )
+      sms = client.account.sms.messages.create(
+         from: TWILIO_CONFIG['from'],
+         to: consumer.phone_number,
+         body: message
+       )
 
-      # Message.create!(
-      #   :sms_sid => sms.sid,
-      #   :consumer => consumer,
-      #   :manager => manager,
-      #   :body => sms.body,
-      #   :from => sms.from,
-      #   :to => sms.to
-      # )
+       Message.create!(
+         :sms_sid => sms.sid,
+         :consumer => consumer,
+         :manager => manager,
+         :body => sms.body,
+         :from => sms.from,
+         :to => sms.to
+       )
     end
   end
 
