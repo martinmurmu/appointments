@@ -29,6 +29,9 @@ $panel_purple: #614c9f;
   
 }
 
+@media (max-width: 767px) {
+}
+
 .signin-form {
   margin-top: 120px;
   color: #E6E6E6;
@@ -38,13 +41,13 @@ $panel_purple: #614c9f;
   }
   
   input {
-    width: 66%;
+    width: 260px;
     height: 45px;
     position: relative;
   }
   
   img.logo {
-    width: 66%;
+    width: 260px;
   }
   
   .round-input {
@@ -52,7 +55,7 @@ $panel_purple: #614c9f;
     -moz-border-radius: 30px; 
     border-radius: 30px; 
     margin: 15px 0;
-    width: 66%;
+    width: 260px;
     padding-left: 50px;
     font-size: 20px;
     color: #E6E6E6;
@@ -87,7 +90,7 @@ $panel_purple: #614c9f;
   }
 
   .link {
-    width: 66%;
+    width: 260px;
     text-align: center;
     margin: 20px 5px;
     
@@ -136,7 +139,7 @@ $panel_purple: #614c9f;
     font-size: 20px;
     font-weight: 700;
     text-decoration: none;
-    width: 66%;
+    width: 260px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
     background: $panel_greenway;
     font-size: 16px;

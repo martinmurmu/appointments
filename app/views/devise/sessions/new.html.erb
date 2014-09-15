@@ -1,9 +1,9 @@
 <div class="main-content">
   <div class="row">
-  	<div class="col-lg-4"></div>
-  	<div class="col-lg-4 form-content">
+  	<div class="col-lg-4 col-sm-4">&nbsp;</div>
+  	<div class="col-lg-4 col-sm-4 form-content">
   		<div class="signin-form">
-  			<img class="logo" src="/assets/img/mywaitlist.svg">
+  			<img class="logo" src="/assets/mywaitlist-logo-withshadow.png">
 			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 			  <i class="fa fa-user"></i>
 			  <%= f.email_field :email, :autofocus => true, :class=>"form-control round-input email-input" %>
