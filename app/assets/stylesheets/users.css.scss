@@ -29,9 +29,6 @@ $panel_purple: #614c9f;
   
 }
 
-@media (max-width: 767px) {
-}
-
 .signin-form {
   margin-top: 120px;
   color: #E6E6E6;
@@ -155,4 +152,20 @@ $panel_purple: #614c9f;
     background: #46791C;
   }
 
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .main-content .col-sm-4 {
+      width: 0%;
+    }
+    .main-content .form-content {
+      margin-left: 10px;
+    }
+    
+    .signin-form label {
+      width: 260px;
+      margin: 10px 25px;
+    }
 }
