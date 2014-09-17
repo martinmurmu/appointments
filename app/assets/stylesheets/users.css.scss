@@ -6,7 +6,7 @@ $panel_red: #d64351;
 $panel_orange: #e89124;
 $panel_purple: #614c9f;
 
-html, body {
+html, body, .container {
   height: 100%;
 }
 
@@ -171,8 +171,147 @@ html, body {
     }
 }
 
-@media (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
     .main-content .form-content {
        width: 90%;
+       
+       .signin-form {
+        margin-top: 200px;
+        color: #E6E6E6;
+        width: 100%;
+        
+        form {
+          margin-top: 60px;
+          width: 100%;
+        }
+        
+        input {
+          height: 90px;
+          position: relative;
+        }
+        
+        img.logo {
+          width: 100%;
+        }
+        
+        .round-input {
+          -webkit-border-radius: 60px; 
+          -moz-border-radius: 60px; 
+          border-radius: 60px; 
+          margin: 30px 0;
+          width: 100%;
+          padding-left: 100px;
+          font-size: 40px;
+          color: #E6E6E6;
+        }
+        
+        .description {
+          text-align:right;
+        }
+        .email-input {
+          background: rgba(197, 196, 196, 0.5);
+          border-color: rgb(197, 196, 196);
+        }
+          
+        i { 
+          position:absolute; 
+          z-index: 2; 
+          padding: 16px 30px;
+          font-size: 60px;
+          color: #E4E4E4;
+        }
+        
+        i.fa-mobile {
+          padding: 12px 30px;
+          font-size: 80px;
+        }
+        
+        .phone-input {
+          background: transparent;
+          border: 2px solid #c5c4c4;
+        }
+        
+        .passwd-input {
+          background: transparent;
+          border: 2px solid #c5c4c4;
+        }
+      
+        .link {
+          width: 100%;
+          font-size: 20px;
+          text-align: center;
+          margin: 0 auto;
+          margin-top: 40px;
+          
+          a, a:link, a:visited {
+            color: #C5B7B7;
+          }
+        }
+        
+        form input.btn.btn-round[type=submit] {
+          background: $panel_blue;
+          font-size: 32px;
+          width:100%;
+        }
+        
+        form input.btn.btn-round[type=submit]:not(.disabled):active {
+          background: $panel_dark_blue;
+          color: #E6E6E6;
+        }
+        
+        form input.btn.btn-round[type=submit]:not(.disabled):hover {
+          background: $panel_dark_blue;
+          color: #E6E6E6;
+        }
+        
+        label {
+          font-size: 18px;
+          color: #fff;
+          font-weight: 400;
+          margin-top: 20px;
+        }
+      
+      }
+      
+      .link-form {
+        
+        margin: 0 auto;
+        color: #fff;
+        
+        label {
+          font-size: 32px;
+          font-weight: 400;
+          margin: 0 auto;
+          margin-top: 20px;
+        }
+        
+        .description-center {
+          text-align:center;
+        }
+        
+        a.btn.btn-round {
+          color: #fff;
+          width: 100%;
+          border-radius: 60px; 
+          font-size: 40px;
+          font-weight: 700;
+          text-decoration: none;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
+          background: $panel_greenway;
+          font-size: 32px;
+          padding-top: 25px;
+          height: 90px;
+        }
+        
+        a.btn.btn-round:not(.disabled):active {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
+          background: #5CA124;
+        }
+        
+        a.btn.btn-round:not(.disabled):hover {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
+          background: #46791C;
+        }
+      }
     }
 }

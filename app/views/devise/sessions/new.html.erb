@@ -6,11 +6,11 @@
   			<img class="logo" src="/assets/mywaitlist-logo-withshadow.png">
 			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 			  <i class="fa fa-user"></i>
-			  <%= f.email_field :email, :autofocus => true, :class=>"form-control round-input email-input" %>
+			  <%= f.email_field :email, :autofocus => true, :class=>"form-control input-sm round-input email-input" %>
 			  <i class="fa fa-lock"></i>
-			  <%= f.password_field :password, :class=>"form-control round-input passwd-input" %>
+			  <%= f.password_field :password, :class=>"form-control input-sm round-input passwd-input" %>
 			  
-			  <div><%= f.submit "Login", :class=>"btn btn-round" %></div>
+			  <div><%= f.submit "Login", :class=>"btn btn-round input-sm" %></div>
 			  
 			  <div class="link">
 			  <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
@@ -21,7 +21,7 @@
 		</div>
 		<div class="link-form">
 			<div class="description-center"><label>Interested?</label></div>
-			<%= link_to "JOIN OUR WAITLIST", join_waitlist_path, :class=>"btn btn-round" %><br />
+			<%= link_to "JOIN OUR WAITLIST", join_waitlist_path, :class=>"btn btn-round input-sm" %><br />
 		</div>
 	</div>
   </div>
