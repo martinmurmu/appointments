@@ -25,6 +25,7 @@ html, body {
   .form-content {
     width: 260px;
     margin: 0 auto;
+    height: 100%;
   }
 }
 
@@ -90,9 +91,10 @@ html, body {
   }
 
   .link {
-    width: 260px;
+    width: 100%;
     text-align: center;
-    margin: 20px 5px;
+    margin: 0 auto;
+    margin-top: 20px;
     
     a, a:link, a:visited {
       color: #C5B7B7;
@@ -126,21 +128,26 @@ html, body {
 
 .link-form {
   
-  margin: 50px auto;
+  margin: 0 auto;
   color: #fff;
   
   label {
     font-size: 16px;
     font-weight: 400;
-    margin: 10px 90px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  
+  .description-center {
+    text-align:center;
   }
   
   a.btn.btn-round {
     color: #fff;
+    width: 100%;
     font-size: 20px;
     font-weight: 700;
     text-decoration: none;
-    width: 260px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
     background: $panel_greenway;
     font-size: 16px;
@@ -159,6 +166,12 @@ html, body {
 }
 
 @media (max-width: 319px) {
+    .main-content .form-content {
+       width: 90%;
+    }
+}
+
+@media (max-width: 1023px) {
     .main-content .form-content {
        width: 90%;
     }
