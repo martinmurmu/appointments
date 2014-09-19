@@ -39,7 +39,7 @@ class Appointment < ActiveRecord::Base
   def is_canceled?
     return (self.status == CANCELED)
   end
-
+  
   def set_broadcasted
       logger.info "set_broadcasted"
     if self.is_filled?
