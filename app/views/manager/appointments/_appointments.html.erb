@@ -1,0 +1,39 @@
+<% @appointments.each do |appointment| %>
+    <% if (appointment.enabled) %>
+      <tr>
+      <td><%= appointment.get_date %></td>
+      <td><%= appointment.get_time %></td>
+      <td><b><%= appointment.assigned_pin %></b></td>
+      <td>
+        <span data-toggle="popover" data-content="<%= appointment.description %>">
+          <%= truncate(appointment.description) %>
+        </span>
+      </td>
+      <td>
+      	<div class="input-group">
+          	<div class="input-group-btn dropdown">
+          		<% if appointment.is_broadcasted? %>
+              	<button href="#" data-toggle="dropdown" class="btn btn-green dropdown-toggle" type="button">
+                <% elsif appointment.is_filled? %>
+				<button href="#" data-toggle="dropdown" class="btn btn-blue dropdown-toggle" type="button">
+				<% elsif appointment.is_cancelled? %>
+				<button href="#" data-toggle="dropdown" class="btn btn-red dropdown-toggle" type="button">
+				<% end %>
+				  <%= appointment.status %>
+				<span class="caret"></span>
+              </button>
+              <ul role="menu" class="dropdown-menu">
+                  <li><%= link_to 'Filled', rebroadcast_manager_appointment_path(appointment),
+                            method: :put, data: { confirm: 'Are you sure you want to rebroadcast this slot?' } %></li>
+                  <li><%= link_to 'Rebroadcast', rebroadcast_manager_appointment_path(appointment),
+                            method: :put, data: { confirm: 'Are you sure you want to rebroadcast this slot?' } %></li>
+                  <li><%= link_to 'Cancel', manager_appointment_path(appointment), 
+                              method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              </ul>
+            </div>
+         </div>
+      </td>
+    <td><a class="edit_link" href="<%= edit_manager_appointment_path(appointment) %>"><i class="fa fa-edit"></i></a></td>  
+    </tr>
+    <% end %>
+  <% end %>

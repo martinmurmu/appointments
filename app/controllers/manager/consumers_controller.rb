@@ -1,5 +1,6 @@
 class Manager::ConsumersController < ManagerController
-
+  helper_method :sort_column, :sort_direction
+  
   load_and_authorize_resource
 
   # GET /manager/consumers
@@ -13,7 +14,10 @@ class Manager::ConsumersController < ManagerController
     else
       @consumers = current_manager.rolable.consumers
     end
-
+    
+    @consumers = Consumer.order(sort_column + " " + sort_direction)
+    @consumers = Consumer.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
+    @consumer = Consumer.new
     respond_to do |format|
       format.html
       format.json { render json: @consumers }
@@ -65,7 +69,12 @@ class Manager::ConsumersController < ManagerController
         format.html { redirect_to manager_consumers_path, notice: 'Well done! This patient has been waitlisted and will receive your broadcasts.' }
         format.json { render json: manager_consumers_path, status: :created, location: @consumer }
       else
-        format.html { render action: "new" }
+        errors = ""
+        @consumer.errors.full_messages.each do |msg|
+          errors.concat("<br>")
+          errors.concat(msg)
+        end
+        format.html { redirect_to manager_consumers_path, alert: errors }
         format.json { render json: @consumer.errors, status: :unprocessable_entity }
       end
     end
@@ -119,5 +128,15 @@ class Manager::ConsumersController < ManagerController
         format.json { render json: @consumer.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  private
+  
+  def sort_column
+    Consumer.column_names.include?(params[:sort]) ? params[:sort] : "date"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

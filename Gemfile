@@ -59,6 +59,7 @@ gem "cancan"
 
 gem "twilio-ruby"
 gem "whenever", :require => false
+gem "will_paginate"
 
 gem "activeadmin", "0.6.2"
 gem "meta_search",    '>= 1.1.0.pre'

@@ -8,17 +8,22 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <div class="row">
-      <div class="col-lg-6 col-sm-6">
-        <%= link_to 'Broadcast open time slot', new_manager_appointment_path %>
+  	<section class="panel">
+      <header class="panel-heading">
+        Complete the form below to broadcast and fill an open slot
+      </header>
+      <div class="panel-body">
+        <%= render 'simple_form' %>
       </div>
+    </section>
+    <div class="row">
       <% if (alert) %>
         <div class="col-lg-6 col-sm-6">        
           <div class="alert alert-block alert-danger fade in">
             <button type="button" class="close close-sm" data-dismiss="alert">
                 <i class="fa fa-times"></i>
             </button>
-            <%= alert %>
+            <%=raw alert %>
           </div>
         </div>
       <% end %>
@@ -37,86 +42,36 @@
   <br />
   <div class="col-lg-12">
     <section class="panel">
-      <header class="panel-heading">
-        Broadcasted Appointment Openings
-      </header>
+    	<div class="row">
+	      <div class="col-lg-5">
+		      <header class="panel-heading">
+		        Broadcasted Appointment Openings
+		      </header>
+	      </div>
+	      <div class="col-lg-offset-4 col-lg-3">
+	      	<!--<input type="text" class="form-control search" placeholder="Search">-->
+	      	<%= form_tag "/manager/appointments", :method => 'get' do %>
+			  <p>
+			    <%= text_field_tag :search, "", :class => "form-control search" %>
+			    <%= submit_tag "", :name => nil, :class => "search-submit" %>
+			  </p>
+			<% end %>
+	      </div>
+      	</div>
       <table class="table table-striped table-advance table-hover">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Assigned PIN</th>
-            <th>Comments</th>
-            <th></th><!-- Rebroadcast -->
-            <th></th><!-- Edit -->
-            <th></th><!-- Cancel -->
+            <th width="15%"><%= sortable "date" %></th>
+            <th width="15%"><%= sortable "time" %></th>
+            <th width="15%"><%= sortable "assigned_pin" %></th>
+            <th width="30%">Comments</th>
+            <th width="20%"><%= sortable "status"%></th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          <% @appointments.each do |appointment| %>
-            <% if (appointment.enabled && !appointment.is_canceled?) %>
-              <tr>
-              <td><%= appointment.get_date %></td>
-              <td><%= appointment.get_time %></td>
-              <td>
-                <% if appointment.is_broadcasted? %>
-                  <span class="label label-mini label-success">
-                <% else %>
-                  <span class="label label-mini label-danger">
-                <% end %>
-                  <%= appointment.status %>
-                </span>
-              </td>
-              <td><b><%= appointment.assigned_pin %></b></td>
-              <td>
-                <span data-toggle="popover" data-content="<%= appointment.description %>">
-                  <%= truncate(appointment.description) %>
-                </span>
-              </td>
-              <td>
-                <%= link_to 'Rebroadcast', rebroadcast_manager_appointment_path(appointment),
-                  method: :put, data: { confirm: 'Are you sure you want to rebroadcast this slot?' } %>
-              </td>
-              <td>
-                <% if appointment.is_broadcasted? %>
-                  <%= link_to 'Edit', edit_manager_appointment_path(appointment) %></td>
-                <% end %>
-              <td>
-                <% if appointment.is_broadcasted? %>
-                  <%= link_to 'Cancel', manager_appointment_path(appointment), 
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
-                <% end %>
-              </td>
-            </tr>
-            <% else %>
-              <tr class="tachado">
-                <td><%= appointment.date %></td>
-                <td><%= appointment.time.strftime("%I:%M%p") %></td>
-                <td>
-                  <% if (appointment.status == 'open') %>
-                    <span class="label label-mini label-success">
-                  <% else %>
-                    <span class="label label-mini label-danger">
-                  <% end %>
-                    cancelled
-                  </span>
-                </td>
-                <td><b><%= appointment.assigned_pin %></b></td>
-                <td>
-                  <span data-toggle="popover" data-content="<%= appointment.description %>">
-                    <%= truncate(appointment.description) %>
-                  </span>
-                </td>
-                <td></td>
-                <td></td>
-                <td>
-                  <%= link_to 'Undo', enable_manager_appointment_path(appointment), 
-                    method: :put, data: { confirm: 'Are you sure? This will rebroadcast the slot.' } %>
-                </td>
-              </tr>
-            <% end %>
-          <% end %>
+          <div class = "sort_paginate_ajax"><%= render 'appointments' %></div>
+          <%= will_paginate @appointments %>
         </tbody>
       </table>
     </section>

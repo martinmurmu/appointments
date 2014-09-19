@@ -1,0 +1,36 @@
+@import 'variables';
+
+/* appointment page */
+.edit_link {
+  font-size: 25px;
+  color: $panel_orange;
+}
+
+.input-group-btn .btn-green {
+  background: $panel_greenway;
+}
+
+.input-group-btn .btn-blue {
+  background: $panel_blue;
+}
+
+.input-group-btn .btn-red {
+  background: $panel_red;
+}
+
+input.form-control.search {
+  width: 91%;
+}
+
+input.search-submit {
+  display: none;
+}
+
+.pagination {
+  float: right;
+  margin: 5px 10px;
+  font-size: 16px;
+  
+}
+
+

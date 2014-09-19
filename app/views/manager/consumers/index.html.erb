@@ -8,11 +8,25 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <div class="row">
-      <div class="col-lg-6 col-sm-6">
-        <%= link_to "Add Patient to Waitlist", new_manager_consumer_path, :class => "btn btn-default" %>
-        <%= link_to "Broadcast Open Time Slot", new_manager_appointment_path, :class => "btn btn-default" %>
+  	<section class="panel">
+      <header class="panel-heading">
+        Create a Waitlister
+      </header>
+      <div class="panel-body">
+        <%= render 'simple_form' %>
       </div>
+    </section>
+    <div class="row">
+      <% if (alert) %>
+        <div class="col-lg-6 col-sm-6">        
+          <div class="alert alert-block alert-danger fade in">
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            <%=raw alert %>
+          </div>
+        </div>
+      <% end %>
       <% if (notice) %>
         <div class="col-lg-6 col-sm-6">        
           <div class="alert alert-success alert-fade-out fade in">
@@ -34,41 +48,16 @@
       <table class="table table-striped table-advance table-hover">
         <thead>
           <tr>
-            <th>Phone</th>
-            <th>Tags</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th width="15%"><%= sortable "phone" %></th>
+            <th width="25%">Name</th>
+            <th width="35%"><%= sortable "tags" %></th>
+            <th width="15%"><%= sortable "status" %></th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          <% @consumers.each do |consumer| %>
-            <% if (consumer.enabled) %>
-              <tr>
-                <td><%= consumer.phone_number %></td>
-                <!-- TODO: This can be expensive -->
-                <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
-                <td></td>
-                <td>
-                  <%= link_to 'Remove from Waitlist', manager_consumer_path(consumer), 
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
-                <td><%= link_to 'Edit', edit_manager_consumer_path(consumer) %></td>
-              </tr>
-            <% else %>
-              <tr class="tachado">
-                <td><%= consumer.phone_number %></td>
-                <!-- TODO: This can be expensive -->
-                <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
-                <td>disabled</td>
-                <td>
-                  <%= link_to 'Undo', enable_manager_consumer_path(consumer), 
-                    method: :put, data: { confirm: 'Are you sure?' } %>
-                </td>
-                <td></td>
-              </tr>
-            <% end %>
-          <% end %>
+          <div class = "sort_paginate_ajax"><%= render 'consumers' %></div>
+          <%= will_paginate @consumers %>
         </tbody>
       </table>
     </section>

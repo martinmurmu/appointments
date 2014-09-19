@@ -32,7 +32,7 @@ class Appointment < ActiveRecord::Base
     return (self.status == BROADCASTED)
   end
 
-def is_filled?
+  def is_filled?
     return (self.status == FILLED)
   end
 
@@ -155,6 +155,15 @@ def is_filled?
          :from => sms.from,
          :to => sms.to
        )
+    end
+  end
+  
+  #search
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['description LIKE ?', "%#{search}%"])
+    else
+      find(:all)
     end
   end
 

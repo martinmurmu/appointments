@@ -15,4 +15,6 @@
  *= require ./bootstrap-reset.css
  *= require ./style.css
  *= require ./style-responsive.css
+ *= require ./appointment.css
+ *= require ./consumer.css
  */

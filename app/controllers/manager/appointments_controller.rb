@@ -1,11 +1,15 @@
 class Manager::AppointmentsController < ManagerController
-
+  helper_method :sort_column, :sort_direction
+  
   load_and_authorize_resource
-
+  
   # GET /manager/appointments
   # GET /manager/appointments.json
   def index
-    @appointments = current_manager.rolable.appointments
+    @appointments = current_manager.rolable.appointments.search(params[:search])
+    @appointments = Appointment.order(sort_column + " " + sort_direction)
+    @appointments = Appointment.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
+    @appointment = Appointment.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -57,7 +61,12 @@ class Manager::AppointmentsController < ManagerController
         format.html { redirect_to manager_appointments_path, notice: notice }
         format.json { render json: manager_appointment_path(@appointment), status: :created, location: @appointment }
       else
-        format.html { render action: "new" }
+        errors = ""
+        @appointment.errors.full_messages.each do |msg|
+          errors.concat("<br>")
+          errors.concat(msg)
+        end
+        format.html { redirect_to manager_appointments_path, alert: errors }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
@@ -174,5 +183,15 @@ class Manager::AppointmentsController < ManagerController
         format.html { redirect_to manager_appointments_path, alert: "You only can rebroadcast non filled slots!" }
       end
     end
+  end
+  
+  private
+  
+  def sort_column
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "date"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

@@ -24,6 +24,15 @@ class Consumer < ActiveRecord::Base
 
   def disable
     self.enabled = false
+  end
+  
+  #search
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['phone LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
   end  
 end
 

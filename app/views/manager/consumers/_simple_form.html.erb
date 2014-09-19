@@ -1,0 +1,31 @@
+<%= form_for([:manager, @consumer], :html => {:class => "form-horizontal tasi-form"}) do |f| %>
+  <% if @consumer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>
+
+      <ul>
+      <% @consumer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="input-group col-lg-3">
+      <%= f.text_field :phone_number, :class => "form-control", :placeholder=>"Phone", :data => { :mask => "+1 999 999 9999"} %>
+      <span class="help-inline">+1 999 999 9999</span>
+    </div>
+    <div class="col-lg-5">
+      <% tags = (@consumer.new_record?) ? "" : @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %>
+      <%= text_field_tag :tags, tags, :id => "tagsinput", :class => "tagsinput", :placeholder=>"Tags" %>
+      <p class="help-block">
+        Add a tag like "urgent" or "new patient" to help you remember the patient or appt. desired.
+      </p>
+    </div>
+    <div class="col-lg-offset-1 col-lg-2">
+      <%= f.submit "Add to Waitlist", :class => "btn btn-default" %>
+    </div>
+  </div>
+<% end %>
+

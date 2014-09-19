@@ -1,0 +1,32 @@
+<% @consumers.each do |consumer| %>
+    <% if (consumer.enabled) %>
+      <tr>
+        <td><%= consumer.phone_number %></td>
+        <td><%= consumer.user_name %></td>
+        <!-- TODO: This can be expensive -->
+        <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
+        <td>
+        	<div class="input-group">
+          	<div class="input-group-btn dropdown">
+          		<% if(consumer.enabled) %>
+              	<button href="#" data-toggle="dropdown" class="btn btn-green dropdown-toggle" type="button">
+              		Enabled
+                <% else %>
+				<button href="#" data-toggle="dropdown" class="btn btn-red dropdown-toggle" type="button">
+					Disabled
+				<% end %>
+				<span class="caret"></span>
+              </button>
+              <ul role="menu" class="dropdown-menu">
+                  <li><%= link_to 'Enable', enable_manager_consumer_path(consumer),
+                            method: :put, data: { confirm: 'Are you sure you want to enable this waitlister?' } %></li>
+                  <li><%= link_to 'Disable', manager_consumer_path(consumer), 
+                              method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              </ul>
+            </div>
+         </div>
+        </td>
+        <td><a class="edit_link" href="<%= edit_manager_consumer_path(consumer) %>"><i class="fa fa-edit"></i></a></td>
+      </tr>
+  <% end %>
+<% end %>
