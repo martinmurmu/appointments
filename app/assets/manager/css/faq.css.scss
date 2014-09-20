@@ -1,0 +1,33 @@
+/*faq*/
+
+.vertical-menu li a {
+    background: #fff;
+    width: 100%;
+    float: left;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #797979;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.vertical-menu li a:hover, .vertical-menu li a:focus, .vertical-menu li.active a {
+    background: #2A3542;
+    width: 100%;
+    float: left;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #fff;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}

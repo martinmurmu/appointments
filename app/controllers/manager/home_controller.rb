@@ -2,20 +2,30 @@ class Manager::HomeController < ManagerController
 
   def index
     if current_manager
-      # waitlister count
-      @consumers_count = current_manager.rolable.consumers.count
       # get waitlister and appointments count by day
+      @date_list = []
       date = Date.today
-      @waitlister_days = []
+      @waitlist_days = []
       @appointments_days = []
       for i in 0..GlobalConstants::GRAPH_DAYS
-        @waitlister_days.push current_manager.rolable.consumers.count(:conditions=>["DATE(consumers.created_at) = ?", date])
-        #@waitlister_days.push current_manager.rolable.consumers.count
-        @appointments_days.push current_manager.rolable.appointments.count(:conditions =>["status=:status and DATE(appointments.created_at)=:date", {status:"Filled", date:date}])
+        @date_list.push date
+        # waitlister
+        waitlist_count = current_manager.rolable.consumers.count(:conditions=>["DATE(consumers.created_at) = ?", date])
+        @waitlist_days.push waitlist_count
+        # appointment
+        appointment_count = current_manager.rolable.appointments.count(:conditions =>["DATE(appointments.created_at) = ?", date])
+        @appointments_days.push appointment_count
         date -= 1
       end
       # appointment count
-      @appointments_filled_count = current_manager.rolable.appointments.where(:status => 'Filled').count
+      @appointments_filled_count = current_manager.rolable.appointments.where(:status => Appointment::FILLED).count
+      @appointments_active_count = current_manager.rolable.appointments.where(:status => Appointment::BROADCASTED).count
+      @appointments_all_count = current_manager.rolable.appointments.count
+      
+      # consumer count
+      @waitlists_filled_count = current_manager.rolable.consumers.where(:status => Consumer::FILLED).count
+      @waitlists_active_count = current_manager.rolable.consumers.where(:status => Consumer::WAITING).count
+      @waitlists_all_count = current_manager.rolable.consumers.count
       
       # new appointment
       @appointment = Appointment.new

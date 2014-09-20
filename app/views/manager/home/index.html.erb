@@ -8,7 +8,7 @@
 	                    <i class="fa fa-user"></i>
 	                </div>
 	                <div class="value">
-	                    <h1 class="count"><%= @consumers_count %></h1>
+	                    <h1 class="count"><%= @waitlists_all_count %></h1>
 	                    <p>Current Waitlist</p>
 	                </div>
 	            </section>
@@ -21,7 +21,7 @@
 	                    <i class="fa fa-bar-chart-o"></i>
 	                </div>
 	                <div class="value">
-	                    <h1 class="count2"><%= @appointments_filled_count %></h1>
+	                    <h1 class="count2"><%= @appointments_all_count %></h1>
 	                    <p>Broadcasts</p>
 	                </div>
 	            </section>
@@ -36,19 +36,19 @@
 	                          <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" 
 	                          	data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" 
 	                          	data-highlight-line-color="#fff" data-spot-radius="4" 
-	                          	data-data="<%= @waitlister_days %>">
+	                          	data-data="<%= @waitlist_days %>">
 	                          	<canvas width="250" height="75" style="display: inline-block; width: 250px; height: 75px; vertical-align: top;"></canvas>
 	                          </div>
 	                      </div>
 	                  </div>
-	                  <div class="chart-tittle">
+	                  <div class="chart-title">
 	                      <span class="title">Waitlisters by day</span>
 	                      <span class="value">
 	                          <a href="#" class="active">All</a>
 	                          |
 	                          <a href="#">Active</a>
 	                          |
-	                          <a href="#">Expired</a>
+	                          <a href="#">Filled</a>
 	                      </span>
 	                  </div>
 	              </div>
@@ -65,14 +65,14 @@
 	                          <canvas width="273" height="75" style="display: inline-block; width: 273px; height: 75px; vertical-align: top;"></canvas></div>
 	                      </div>
 	                  </div>
-	                  <div class="chart-tittle">
-	                      <span class="title">Appointments by day</span>
+	                  <div class="chart-title">
+	                      <span class="title">Broadcasts by day</span>
 	                      <span class="value">
 	                          <a href="#" class="active">All</a>
 	                          |
 	                          <a href="#">Active</a>
 	                          |
-	                          <a href="#">Expired</a>
+	                          <a href="#">Filled</a>
 	                      </span>
 	                  </div>
 	              </div>
@@ -89,7 +89,7 @@
 	<div class="col-lg-5">
 		<section class="panel">
           <header class="panel-heading">
-              Add Appointment
+              Create Broadcast
           </header>
           <div class="panel-body">
               <%= render 'manager/shared/appointments_form' %>

@@ -2,9 +2,9 @@
     <% if (consumer.enabled) %>
       <tr>
         <td><%= consumer.phone_number %></td>
-        <td><%= consumer.user_name %></td>
+        <td><%= consumer.name %></td>
         <!-- TODO: This can be expensive -->
-        <% if (consumer.tags) %>
+        <% if consumer.tags %>
         <td><%= consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %></td>
         <% else %>
         <td>&nbsp;</td>

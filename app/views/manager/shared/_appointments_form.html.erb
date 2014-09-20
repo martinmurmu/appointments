@@ -32,24 +32,10 @@
   </div>
   <div class="form-group">
     <div class="col-lg-offset-3 col-lg-8">
-      <%= f.submit "Broadcast Appointment", :class => "btn btn-success" %>
+      <%= f.submit "Create Broadcast", :class => "btn btn-success" %>
     </div>
   </div>
   <div class="col-lg-offset-3 col-lg-8">
 	<p class="flash-notice" id="appointment-notice"></p>
   </div>
 <% end %>
-
-<script type="text/javascript">
-
-$(window).load(function() {
-    $(".form_datetime-meridian").datetimepicker({
-        format: "MM d, yyyy - H:ii P",
-        showMeridian: true,
-        autoclose: true,
-        todayBtn: true,
-        pickerPosition: 'bottom-left'
-    });
-});
-
-</script>

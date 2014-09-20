@@ -1,4 +1,4 @@
-class Manager::PagesController < ActionController::Base
+class Manager::PagesController < ManagerController
   def faq
     # FAQ page
     render

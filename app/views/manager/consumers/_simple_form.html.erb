@@ -13,17 +13,20 @@
 
   <div class="form-group">
     <div class="input-group col-lg-3">
+      <%= f.text_field :name, :class => "form-control", :placeholder=>"Name" %>
+    </div>
+    <div class="input-group col-lg-3">
       <%= f.text_field :phone_number, :class => "form-control", :placeholder=>"Phone", :data => { :mask => "+1 999 999 9999"} %>
       <span class="help-inline">+1 999 999 9999</span>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-4">
       <% tags = (@consumer.new_record?) ? "" : @consumer.tags.where(:manager_id => current_manager.rolable.id).first.tags %>
       <%= text_field_tag :tags, tags, :id => "tagsinput", :class => "tagsinput", :placeholder=>"Tags" %>
       <p class="help-block">
         Add a tag like "urgent" or "new patient" to help you remember the patient or appt. desired.
       </p>
     </div>
-    <div class="col-lg-offset-1 col-lg-2">
+    <div class="col-lg-2">
       <%= f.submit "Add to Waitlist", :class => "btn btn-default" %>
     </div>
   </div>

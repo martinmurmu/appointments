@@ -953,7 +953,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .chart .heading span {
     display: block;
 }
-.panel.green-chart .chart-tittle {
+.panel.green-chart .chart-title {
     font-size: 16px;
     padding: 15px;
     display: inline-block;
@@ -964,7 +964,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border-radius: 0px 0px 4px 4px;
 }
 
-.panel.red-chart .chart-tittle {
+.panel.red-chart .chart-title {
     font-size: 12px;
     padding: 15px;
     display: inline-block;
@@ -976,7 +976,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     color: #eee;
 }
 
-.panel.blue-chart .chart-tittle {
+.panel.blue-chart .chart-title {
     font-size: 12px;
     padding: 15px;
     display: inline-block;
@@ -993,11 +993,22 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     display: inline-block;
 }
 
-.chart-tittle .title {
-
+.chart-title .value {
+  float: right;
+  padding: 0 5px;
 }
 
-.panel.green-chart .chart-tittle .value {
+.chart-title .value a {
+  color: #eee;
+  font-weight: 300;
+}
+
+.chart-title .value a.active {
+  color: #eee;
+  font-weight: 500;
+}
+
+.panel.green-chart .chart-title .value {
     float: right;
     color: #c0f080;
 }
@@ -1012,22 +1023,22 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     color: #fff;
 }
 
-.panel.terques-chart .chart-tittle .value {
+.panel.terques-chart .chart-title .value {
     float: right;
     color: #fff;
 }
 
-.panel.terques-chart .chart-tittle .value a {
+.panel.terques-chart .chart-title .value a {
     color: #fff;
     font-size: 12px;
 }
 
-.panel.terques-chart .chart-tittle .value a:hover, .panel.terques-chart .chart-tittle .value a.active {
+.panel.terques-chart .chart-title .value a:hover, .panel.terques-chart .chart-title .value a.active {
     color: #55f2e7;
     font-size: 12px;
 }
 
-.panel.terques-chart .chart-tittle {
+.panel.terques-chart .chart-title {
     font-size: 16px;
     padding: 15px;
     display: inline-block;
@@ -4110,7 +4121,10 @@ span.customSelect.changed {
 }
 
 .logo img {
-   	width: 50%;
+  width: 50%;
 }
 
+.panel header.panel-heading {
+  font-weight: 500;
+}
 

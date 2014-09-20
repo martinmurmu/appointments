@@ -18,6 +18,8 @@
 				<button href="#" data-toggle="dropdown" class="btn btn-blue dropdown-toggle" type="button">
 				<% elsif appointment.is_canceled? %>
 				<button href="#" data-toggle="dropdown" class="btn btn-red dropdown-toggle" type="button">
+				<% else %>
+				<button href="#" data-toggle="dropdown" class="btn btn-red dropdown-toggle" type="button">
 				<% end %>
 				  <%= appointment.status %>
 				<span class="caret"></span>

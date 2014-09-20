@@ -26,8 +26,8 @@ class Appointment < ActiveRecord::Base
 
   def disable
     self.enabled = false
-  end 
-
+  end
+  
   def is_broadcasted?
     return (self.status == BROADCASTED)
   end

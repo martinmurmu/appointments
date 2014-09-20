@@ -1,4 +1,4 @@
-<%= form_for([:manager, @consumer], :remote=>true, :html => {:class => "form-horizontal tasi-form"}, :url => {:controller => 'home', :action => 'consumer'}) do |f| %>
+<%= form_for([:manager, @consumer], :remote=>true, :html => {:class => "form-horizontal"}, :url => {:controller => 'home', :action => 'consumer'}) do |f| %>
   <% if @consumer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>
@@ -12,16 +12,18 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label "Name", :class => "col-lg-3 col-sm-3 control-label" %>
+    <div class="input-group col-lg-7">
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label "Phone", :class => "col-lg-3 col-sm-3 control-label" %>
     <div class="input-group col-lg-7">
-      <!--<span class="input-group-addon">+1</span>
-      <%= f.text_field :phone_number, :class => "form-control input-lg", :placeholder => "+1 415 599 2671" %>
-      <p class="help-block">(ex. +1 415 599 2671)</p-->
       <%= f.text_field :phone_number, :class => "form-control", :data => { :mask => "+1 999 999 9999"} %>
       <span class="help-inline">+1 999 999 9999</span>
     </div>
   </div>
-
   <div class="form-group">
     <%= f.label "Tags", :class => "col-lg-3 col-sm-3 control-label" %>
     <div class="col-lg-7">
