@@ -18,4 +18,5 @@
  *= require ./appointment.css
  *= require ./consumer.css
  *= require ./faq.css
+ *= require ./jquery.datetimepicker.css
  */

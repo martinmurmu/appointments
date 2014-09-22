@@ -13,8 +13,8 @@
 
   <div class="form-group">
       <div class="col-lg-3">
-          <div class="input-group date form_datetime-meridian">
-              <input type="text" name="datetime" placeholder="Date"
+          <div class="input-group date">
+              <input type="text" name="datetime" id="datetime" placeholder="Date"
                 class="form-control" readonly="" size="16" value="<%= @appointment.get_datetime %>">
               <div class="input-group-btn">
                   <button type="button" class="btn btn-info date-set"><i class="fa fa-calendar"></i></button>
@@ -30,15 +30,3 @@
   </div>
 <% end %>
 
-<script type="text/javascript">
-
-$(window).load(function() {
-    $(".form_datetime-meridian").datetimepicker({
-        format: "MM d, yyyy - H:ii P",
-        showMeridian: true,
-        autoclose: true,
-        todayBtn: true
-    });
-});
-
-</script>

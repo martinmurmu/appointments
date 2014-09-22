@@ -67,7 +67,7 @@ var Script = function () {
         events: [
             {
                 title: 'All Day Event',
-                start: new Date(y, m, 1)
+                start: '2014-09-04'
             },
             {
                 title: 'Long Event',

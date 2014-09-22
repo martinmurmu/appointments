@@ -15,6 +15,13 @@ $(function() {
     	$.getScript(this.href);
     	return false;
   	});
+  	
+  	// datetimepicker
+  	$('#datetime').datetimepicker();
+  	
+  	$("button.date-set").click(function () {
+  		$(this).parent().parent().children("#datetime").focus();
+  	});
 });
 
 var Script = function () {

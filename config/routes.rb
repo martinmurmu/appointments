@@ -28,6 +28,8 @@ Appointments::Application.routes.draw do
     root :to => 'home#index'
     get 'profile' => 'profiles#edit'
     put 'profile' => 'profiles#update'
+    get 'home/countwaitlist' => 'home#countwaitlist'
+    get 'home/countappointment' => 'home#countappointment'
     post 'home/appointments' => 'home#appointments'
     post 'home/consumer' => 'home#consumer'
     resources :appointments do

@@ -949,10 +949,18 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 .chart .heading {
     text-align: left;
+    color: #fff;
 }
 .chart .heading span {
     display: block;
+    margin-left: 8px;
 }
+
+.chart .heading span label{
+    font-size: 11px;
+    font-weight: 500;
+}
+
 .panel.green-chart .chart-title {
     font-size: 16px;
     padding: 15px;
@@ -4128,3 +4136,15 @@ span.customSelect.changed {
   font-weight: 500;
 }
 
+/* for calendar */
+#fullCalModal .modal-content {
+  width: 400px;
+  
+  .modal-body div label{
+    font-weight: 300;
+  }
+}
+
+.fc-event:hover {
+  cursor:pointer;
+}

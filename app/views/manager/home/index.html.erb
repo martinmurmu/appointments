@@ -8,7 +8,7 @@
 	                    <i class="fa fa-user"></i>
 	                </div>
 	                <div class="value">
-	                    <h1 class="count"><%= @waitlists_all_count %></h1>
+	                    <h1 class="count" id="waitlist-count"><%= @waitlists_all_count %></h1>
 	                    <p>Current Waitlist</p>
 	                </div>
 	            </section>
@@ -21,7 +21,7 @@
 	                    <i class="fa fa-bar-chart-o"></i>
 	                </div>
 	                <div class="value">
-	                    <h1 class="count2"><%= @appointments_all_count %></h1>
+	                    <h1 class="count2" id="appointment-count"><%= @appointments_all_count %></h1>
 	                    <p>Broadcasts</p>
 	                </div>
 	            </section>
@@ -33,7 +33,10 @@
 	                  <div 
 	                  class="panel-body chart-texture">
 	                      <div class="chart">
-	                          <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" 
+	                      	  <div class="heading">
+                                  <span><%=raw @date_label%></span>
+                              </div>
+	                          <div class="sparkline" id="waitlist-days" data-type="line" data-resize="true" data-height="75" data-width="90%" 
 	                          	data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" 
 	                          	data-highlight-line-color="#fff" data-spot-radius="4" 
 	                          	data-data="<%= @waitlist_days %>">
@@ -44,11 +47,11 @@
 	                  <div class="chart-title">
 	                      <span class="title">Waitlisters by day</span>
 	                      <span class="value">
-	                          <a href="#" class="active">All</a>
+	                          <a href="javascript:countWaitlist('<%= GlobalConstants::ALL%>')" class="active">All</a>
 	                          |
-	                          <a href="#">Active</a>
+	                          <a href="javascript:countWaitlist('<%= GlobalConstants::ACTIVE%>')">Active</a>
 	                          |
-	                          <a href="#">Filled</a>
+	                          <a href="javascript:countWaitlist('<%= GlobalConstants::FILLED%>')">Filled</a>
 	                      </span>
 	                  </div>
 	              </div>
@@ -57,7 +60,10 @@
 	            <div class="panel red-chart">
 	                  <div class="panel-body chart-texture">
 	                      <div class="chart">
-	                          <div class="sparkline" data-type="line" data-resize="true" data-height="75" 
+	                      	  <div class="heading">
+	                              <span><%=raw @date_label%></span>
+                              </div>
+	                          <div class="sparkline" id="appointment-days" data-type="line" data-resize="true" data-height="75" 
 	                          data-width="90%" data-line-width="1" data-line-color="#fff" 
 	                          data-spot-color="#fff" data-fill-color="" 
 	                          data-highlight-line-color="#fff" data-spot-radius="4" 
@@ -68,11 +74,11 @@
 	                  <div class="chart-title">
 	                      <span class="title">Broadcasts by day</span>
 	                      <span class="value">
-	                          <a href="#" class="active">All</a>
+	                          <a href="javascript:countAppointment('<%= GlobalConstants::ALL%>')" class="active">All</a>
 	                          |
-	                          <a href="#">Active</a>
+	                          <a href="javascript:countAppointment('<%= GlobalConstants::ACTIVE%>')">Active</a>
 	                          |
-	                          <a href="#">Filled</a>
+	                          <a href="javascript:countAppointment('<%= GlobalConstants::FILLED%>')">Filled</a>
 	                      </span>
 	                  </div>
 	              </div>
@@ -104,6 +110,29 @@
           </div>
       </section>
 	</div>
+	
+	<!-- Calendar modal for clicking element-->
+	<div id="fullCalModal" class="modal fade">
+	    <div class="modal-dialog">
+		<div class="modal-content">
+		    <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">X</button>
+			<h4 id="modalTitle" class="modal-title"></h4>
+		    </div>
+		    <div id="modalBody" class="modal-body">
+		    	<div class="row"><div class="col-lg-4"><label>Date:</label></div><div class="col-lg-7" id="appDate"></div></div>
+		    	<div class="row"><div class="col-lg-4"><label>Time:</label></div><div class="col-lg-7" id="appTime"></div></div>
+		    	<div class="row"><div class="col-lg-4"><label>Assined Pin:</label></div><div class="col-lg-7" id="appPin"></div></div>
+		    	<div class="row"><div class="col-lg-4"><label>Comments:</label></div><div class="col-lg-7" id="appComments"></div></div>
+		    	<div class="row"><div class="col-lg-4"><label>Status:</label></div><div class="col-lg-7" id="appStatus"></div></div>
+		    </div>
+		    <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button class="btn btn-primary"><a id="appEditUrl" href="" target="_blank">Edit Appointment</a></button>
+		    </div>
+		</div>
+	    </div>
+	</div>
 <% else %>
     <h1>Manager::Dashboard</h1>
     <p>Please sign in...</p>
@@ -117,5 +146,115 @@
 
     <!--script for this page-->
     <script src="/assets/js/sparkline-chart.js"></script>
-    <script src="/assets/js/external-dragging-calendar.js"></script>
+    <!--<script src="/assets/js/external-dragging-calendar.js"></script>-->
+    
+    <script>
+    	function countWaitlist(status) {
+    		
+    		// send ajax request
+    		var data;
+		    $.ajax({
+		    	type: "GET",
+				url: '/manager/home/countwaitlist/?status=' + status,
+				dataType: "JSON",
+		    	success: function(data) {
+		    		console.log(data);
+		      		$("#waitlist-count").html(data.count);
+		      		array_days = data.days.toString();
+					var disp_days = array_days.split(",");
+					console.log(disp_days);
+					$("#waitlist-days").sparkline(disp_days, {
+						type: 'line',
+						width: '90%',
+						lineColor: '#fff',
+						height: 75,
+						spotRadius: 4,
+						spotColor: '#fff',
+						lineWidth: 1,
+						highLightLineColor: '#fff',
+						fillColor: '',
+						resize: true
+					});
+		    	}
+		  	});
+    	}
+    	
+    	function countAppointment(status) {
+    		// send ajax request
+    		var data;
+		    $.ajax({
+		    	type: "GET",
+				url: '/manager/home/countappointment/?status=' + status,
+				dataType: "JSON",
+		    	success: function(data) {
+		    		console.log(data);
+		      		$("#appointment-count").html(data.count);
+		      		array_days = data.days.toString();
+					var disp_days = array_days.split(",");
+					console.log(disp_days);
+					$("#appointment-days").sparkline(disp_days, {
+						type: 'line',
+						width: '90%',
+						lineColor: '#fff',
+						height: 75,
+						spotRadius: 4,
+						spotColor: '#fff',
+						lineWidth: 1,
+						highLightLineColor: '#fff',
+						fillColor: '',
+						resize: true
+					});
+		    	}
+		  	});
+    	}
+    	
+    	$(function() {
+	    	$('#calendar').fullCalendar({
+		        header: {
+		            left: 'prev,next today',
+		            center: 'title',
+		            right: 'month,basicWeek,basicDay'
+		        },
+		        editable: true,
+		        disableDragging: true, // this allows things to be dropped onto the calendar !!!
+		        drop: function(date, allDay) { // this function is called when something is dropped
+		
+		            // retrieve the dropped element's stored Event Object
+		            var originalEventObject = $(this).data('eventObject');
+		
+		            // we need to copy it, so that multiple events don't have a reference to the same object
+		            var copiedEventObject = $.extend({}, originalEventObject);
+		
+		            // assign it the date that was reported
+		            copiedEventObject.start = date;
+		            copiedEventObject.allDay = allDay;
+		
+		            // render the event on the calendar
+		            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+		            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+		
+		            // is the "remove after drop" checkbox checked?
+		            if ($('#drop-remove').is(':checked')) {
+		                // if so, remove the element from the "Draggable Events" list
+		                $(this).remove();
+		            }
+		
+		        },
+		        eventClick: function(calEvent, jsEvent, view) {
+		        	// retrieve the dropped element's stored Event Object
+		            console.log(calEvent);
+		            $("#modalTitle").html(calEvent.title);
+			    	$("#appDate").html(calEvent.ddate);
+			    	$("#appTime").html(calEvent.time);
+			    	$("#appPin").html(calEvent.pin);
+			    	$("#appComments").html(calEvent.comments);
+			    	$("#appStatus").html(calEvent.status);
+			    	$("#appEditUrl").attr('href', '/manager/appointments/'+calEvent.id+'/edit');
+			    	$("#fullCalModal").modal();
+		        },
+		        events:<%= @calendar_data.to_json.html_safe %>
+		        //events:[{title: 'Test', start: '2014-09-02', pin:'Pin: XXX'}]
+		     });
+		   });
+    </script>
 

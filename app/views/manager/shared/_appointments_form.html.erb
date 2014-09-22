@@ -14,12 +14,13 @@
   <div class="form-group">
       <%= f.label :date, :class => "col-lg-3 col-sm-3 control-label" %>
       <div class="col-lg-7">
-          <div class="input-group date form_datetime-meridian">
-              <input type="text" name="datetime" 
-                class="form-control" readonly="" size="16" value="<%= @appointment.get_datetime %>">
+          <div class="input-group">
+              <input type="text" name="datetime" id="datetime"
+                class="form-control"  size="16" value="<%= @appointment.get_datetime %>">
               <div class="input-group-btn">
-                  <button type="button" class="btn btn-info date-set"><i class="fa fa-calendar"></i></button>
-              </div>
+	                <button type="button" class="btn btn-info date-set"><i class="fa fa-calendar"></i></button>
+	            </div>
+              
           </div>
       </div>
   </div>

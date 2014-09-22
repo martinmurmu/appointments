@@ -7,6 +7,10 @@ class Manager::AppointmentsController < ManagerController
   # GET /manager/appointments.json
   def index
     @appointments = current_manager.rolable.appointments.search(params[:search])
+    p 1111111111111
+    p sort_column
+    p sort_direction
+    p 3333333333333
     @appointments = Appointment.order(sort_column + " " + sort_direction)
     @appointments = Appointment.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
     @appointment = Appointment.new
