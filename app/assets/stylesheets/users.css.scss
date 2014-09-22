@@ -59,6 +59,17 @@ html, body{
     color: #E6E6E6;
   }
   
+  select {
+    -webkit-border-radius: 30px; 
+    -moz-border-radius: 30px; 
+    border-radius: 30px; 
+    margin: 15px 0;
+    width: 100%;
+    padding-left: 50px;
+    font-size: 20px;
+    color: #5C5353;
+  }
+  
   .description {
     text-align:right;
   }
@@ -113,7 +124,7 @@ html, body{
   }
   
   form input.btn.btn-round[type=submit]:not(.disabled):hover {
-    background: $panel_dark_blue;
+    background: $panel_blue;
     color: #E6E6E6;
   }
   
@@ -123,7 +134,23 @@ html, body{
     font-weight: 400;
     margin-top: 10px;
   }
-
+  
+  h3 {
+    color: #ddd;
+  }
+  
+  input:-moz-placeholder {  
+    color: #ccc;  
+  } 
+  input::-moz-placeholder {  
+    color: #ccc;  
+  } 
+  input::-webkit-input-placeholder {  
+    color: #ccc;  
+  } 
+  input:-ms-input-placeholder {  
+    color: #ccc;  
+  }  
 }
 
 .link-form {
@@ -160,7 +187,7 @@ html, body{
   
   a.btn.btn-round:not(.disabled):hover {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
-    background: #46791C;
+    background: $panel_greenway;
   }
 
 }
@@ -177,7 +204,6 @@ html, body{
        
        .signin-form {
         margin-top: 200px;
-        color: #E6E6E6;
         width: 100%;
         
         form {
@@ -202,23 +228,17 @@ html, body{
           width: 100%;
           padding-left: 100px;
           font-size: 40px;
-          color: #E6E6E6;
         }
         
         .description {
           text-align:right;
         }
-        .email-input {
-          background: rgba(197, 196, 196, 0.5);
-          border-color: rgb(197, 196, 196);
-        }
-          
+        
         i { 
           position:absolute; 
           z-index: 2; 
           padding: 16px 30px;
           font-size: 60px;
-          color: #E4E4E4;
         }
         
         i.fa-mobile {
@@ -226,48 +246,21 @@ html, body{
           font-size: 80px;
         }
         
-        .phone-input {
-          background: transparent;
-          border: 2px solid #c5c4c4;
-        }
-        
-        .passwd-input {
-          background: transparent;
-          border: 2px solid #c5c4c4;
-        }
-      
         .link {
           width: 100%;
           font-size: 20px;
           text-align: center;
           margin: 0 auto;
           margin-top: 40px;
-          
-          a, a:link, a:visited {
-            color: #C5B7B7;
-          }
         }
         
         form input.btn.btn-round[type=submit] {
-          background: $panel_blue;
           font-size: 32px;
           width:100%;
         }
         
-        form input.btn.btn-round[type=submit]:not(.disabled):active {
-          background: $panel_dark_blue;
-          color: #E6E6E6;
-        }
-        
-        form input.btn.btn-round[type=submit]:not(.disabled):hover {
-          background: $panel_dark_blue;
-          color: #E6E6E6;
-        }
-        
         label {
           font-size: 18px;
-          color: #fff;
-          font-weight: 400;
           margin-top: 20px;
         }
       
@@ -303,15 +296,6 @@ html, body{
           height: 90px;
         }
         
-        a.btn.btn-round:not(.disabled):active {
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
-          background: #5CA124;
-        }
-        
-        a.btn.btn-round:not(.disabled):hover {
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px rgb(45, 68, 109);
-          background: #46791C;
-        }
       }
     }
 }

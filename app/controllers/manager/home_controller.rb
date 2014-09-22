@@ -36,7 +36,6 @@ class Manager::HomeController < ManagerController
       
       # json data for calendar
       @calendar_data = appointmentsbydate(Date.today)
-      p @calendar_data.to_json
       
       # new appointment
       @appointment = Appointment.new

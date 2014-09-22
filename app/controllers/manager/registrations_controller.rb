@@ -1,5 +1,7 @@
 class Manager::RegistrationsController < Devise::RegistrationsController
 
+  layout 'manager'
+  
   def new
     super
   end

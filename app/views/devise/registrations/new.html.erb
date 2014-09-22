@@ -1,20 +1,29 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div class="main-content">
+  <div class="container">
+  	<div class="row">
+  	  <div class="form-content">
+  		<div class="signin-form">			
+			<h3>Sign up</h3>
+			
+			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+			  <%= devise_error_messages! %>
+			  <i class="fa fa-user"></i>
+			  <%= f.email_field :email, :autofocus => true, 
+			  	:class=>"form-control input-sm round-input email-input", 
+			  	:placeholder=>"Email" %>
+			  <i class="fa fa-lock"></i>
+			  <%= f.password_field :password, :class=>"form-control input-sm round-input email-input",
+			  	:placeholder=>"Password" %>
+			  <i class="fa fa-lock"></i>
+			  <%= f.password_field :password_confirmation, :class=>"form-control input-sm round-input email-input",
+			  	:placeholder=>"Password confirm" %>
+			
+			  <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+			
+			  <div><%= f.submit "Sign up", :class=>"btn btn-round input-sm" %></div>
+			  <div class="link">
+				<%= render "devise/shared/links" %>
+			  </div>
+			<% end %>
+						
+			</div></div></div></div></div>
