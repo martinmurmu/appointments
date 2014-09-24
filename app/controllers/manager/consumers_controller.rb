@@ -10,13 +10,14 @@ class Manager::ConsumersController < ManagerController
 
     if params[:appointment_id]
       appointment = Appointment.find(params[:appointment_id])
-      @consumers = appointment.consumers
+      @consumers = appointment.consumers.
+        where(["name LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
     else
-      @consumers = current_manager.rolable.consumers
+      @consumers = current_manager.rolable.consumers.
+        where(["name LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
     end
     
-    @consumers = Consumer.order(sort_column + " " + sort_direction)
-    @consumers = Consumer.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
+    @consumers = @consumers.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
     @consumer = Consumer.new
     respond_to do |format|
       format.html
@@ -133,7 +134,7 @@ class Manager::ConsumersController < ManagerController
   private
   
   def sort_column
-    Consumer.column_names.include?(params[:sort]) ? params[:sort] : "date"
+    Consumer.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
   
   def sort_direction

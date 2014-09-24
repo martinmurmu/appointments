@@ -1,0 +1,70 @@
+<style type="text/css">
+
+  .tachado {
+    text-decoration: line-through;
+  }
+
+</style>
+
+<div class="row">
+  <div class="col-lg-12">
+  	<section class="panel">
+      <header class="panel-heading">
+        Create a Manager
+      </header>
+      <div class="panel-body">
+        <%= render 'simple_form' %>
+      </div>
+    </section>
+    <div class="row">
+      <% if (alert) %>
+        <div class="col-lg-6 col-sm-6">        
+          <div class="alert alert-block alert-danger fade in">
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            <%=raw alert %>
+          </div>
+        </div>
+      <% end %>
+      <% if (notice) %>
+        <div class="col-lg-6 col-sm-6">        
+          <div class="alert alert-success alert-fade-out fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button">
+              <i class="fa fa-times"></i>
+            </button>
+            <%= notice %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br />
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        All Managers
+      </header>
+      <table class="table table-striped table-advance table-hover sorttable">
+        <thead>
+          <tr>
+            <th width="15%"><%= sortable "practice_name" %></th>
+            <th width="25%"><%= sortable "practice_address" %></th>
+            <th width="35%"><%= sortable "practice_phone" %></th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div class = "sort_paginate_ajax"><%= render 'managers' %></div>
+          <%= will_paginate @managers %>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
+
+<script language="javascript">
+  $(window).load(function() {
+    $(".alert-fade-out").delay(2000).fadeTo(2000, 0, 'linear', function() { $(".alert-fade-out").hide() });
+  });
+</script>

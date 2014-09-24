@@ -50,6 +50,17 @@ Appointments::Application.routes.draw do
       resources :tags
     end
     
+    resources :managers do
+      member do
+        get '/' => 'managers#index'
+        get 'new' => 'managers#new'
+        get 'edit' => 'managers#edit'
+        put 'create' => 'managers#create'
+        put 'update' => 'managers#update'
+      end
+      resources :tags
+    end
+    
     # Static Pages
     get 'faq' => 'pages#faq', as: :faq_page
   end

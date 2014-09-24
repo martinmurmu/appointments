@@ -36,4 +36,23 @@ input.search-submit {
   
 }
 
+.sorttable th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.sorttable th a {
+  width: 120px;
+  display: block;
+}
+
+.sorttable th .asc {
+  background: url('../img/sort_asc.png') no-repeat center right;
+}
+
+.sorttable th .desc {
+  background: url('../img/sort_desc.png') no-repeat center right;
+}
+
 

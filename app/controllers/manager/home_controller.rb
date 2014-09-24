@@ -36,6 +36,7 @@ class Manager::HomeController < ManagerController
       
       # json data for calendar
       @calendar_data = appointmentsbydate(Date.today)
+      p @calendar_data
       
       # new appointment
       @appointment = Appointment.new
@@ -167,10 +168,15 @@ class Manager::HomeController < ManagerController
       ["status=? AND DATE(appointments.date)>=? AND DATE(appointments.date)<=?", Appointment::BROADCASTED, start_date, end_date])
     
     dip_json = []
-    app = {}
+    
     appointments.each do |appointment|
       # main infomations
-      app[:title] = appointment.description
+      app = {}
+      if appointment.assigned_pin.nil?
+        app[:title] = "No Assigned Pin"
+      else
+        app[:title] = appointment.assigned_pin
+      end
       app[:start] = appointment.date
       # display infomations
       app[:id] = appointment.id
