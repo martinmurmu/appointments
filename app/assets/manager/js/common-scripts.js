@@ -17,7 +17,15 @@ $(function() {
   	});
   	
   	// datetimepicker
-  	$('#datetime').datetimepicker();
+  	$('#datetime').datetimepicker({
+  		formatDate: "dd MM yyyy",
+  		formatTime: "h:i a",
+  		timepicker:true,
+	    autoclose: true,
+	    todayBtn: true,
+	    startDate: "2013-02-14 10:00",
+	    minuteStep: 5
+  	});
   	
   	$("button.date-set").click(function () {
   		$(this).parent().parent().children("#datetime").focus();

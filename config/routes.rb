@@ -55,8 +55,9 @@ Appointments::Application.routes.draw do
         get '/' => 'managers#index'
         get 'new' => 'managers#new'
         get 'edit' => 'managers#edit'
-        put 'create' => 'managers#create'
-        put 'update' => 'managers#update'
+        post 'create' => 'managers#create'
+        post 'update' => 'managers#update'
+        delete 'destroy' => 'managers#destroy', as: 'destroy'
       end
       resources :tags
     end

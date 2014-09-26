@@ -7,15 +7,35 @@ class Manager < ActiveRecord::Base
   has_many :pins, :through => :appointments
   has_many :consumers, :through => :tags
 
-  attr_accessible :practice_name, :practice_phone, :practice_address, :token
+  attr_accessible :name, :phone, :token
 
-  validates :practice_name, :practice_phone, :practice_address, :presence => true
+  validates :name, :phone, :presence => true
 
   # before_create :generate_token_seo
   before_save :generate_token_seo
 
   def to_s
-    practice_name
+    name
+  end
+  
+  def user
+    User.where(:rolable_type=>'manager', :rolable_id=>self.id).first    
+  end
+  
+  def manager_name
+    name
+  end
+  
+  def creation_date
+    created_at
+  end
+  
+  def last_login_date
+    if user.nil? 
+      "No assigned User Account."
+    else
+      user.last_sign_in_at
+    end
   end
 
   def self.notify_waitlists
@@ -31,7 +51,7 @@ class Manager < ActiveRecord::Base
 
         # Create and send an SMS message. Message must be editable?
         logger.debug "Remainder message..."
-        logger.debug "From: #{manager.practice_phone}"
+        logger.debug "From: #{manager.phone}"
         logger.debug "To: #{consumer.phone_number}"
         logger.debug "Message: #{message}"
 
@@ -54,7 +74,7 @@ class Manager < ActiveRecord::Base
   end
 
   def generate_token_seo
-    self.token = self.practice_name + "-" + self.practice_address
+    self.token = self.name + "-" + self.phone
     self.token = self.token.delete(",.").gsub(/ /, "-")
   end
 

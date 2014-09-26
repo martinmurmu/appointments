@@ -1,8 +1,10 @@
 <% @managers.each do |manager| %>
     <tr>
-	    <td width="35%"><%= manager.practice_name %></td>
-	    <td width="25%"><%= manager.practice_address %></td>
-	    <td width="15%"><%= manager.practice_phone %></td>
-	    <td><a class="edit_link" href="<%= edit_manager_manager_path(manager) %>"><i class="fa fa-edit"></i></a></td>
+	    <td><%= manager.manager_name %></td>
+	    <td><%= manager.phone %></td>
+	    <td><%= manager.creation_date %></td>
+	    <td><%= manager.last_login_date %></td>
+	    <td><%= link_to ('<i class="fa fa-edit"></i>').html_safe, edit_manager_manager_path(manager), :class=>'edit_link' %></td>
+	    <td><%= link_to ('<i class="fa fa-times-circle"></i>').html_safe, destroy_manager_manager_path(manager), :class=>'edit_link', method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	  </tr>
 <% end %>

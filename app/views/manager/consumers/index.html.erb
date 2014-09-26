@@ -42,9 +42,21 @@
   <br />
   <div class="col-lg-12">
     <section class="panel">
-      <header class="panel-heading">
-        Waitlisted Patients
-      </header>
+    	<div class="row">
+	      <div class="col-lg-5">
+      		<header class="panel-heading">
+        		Waitlisted Patients
+      		</header>
+      	  </div>
+      	  <div class="col-lg-offset-4 col-lg-3">
+      		<%= form_tag "/manager/consumers", :method => 'get' do %>
+		  	<p>
+		    	<%= text_field_tag :search, "", :class => "form-control search" %>
+		    	<%= submit_tag "", :name => nil, :class => "search-submit" %>
+		  	</p>
+			<% end %>
+      	  </div>
+      	</div>
       <table class="table table-striped table-advance table-hover sorttable">
         <thead>
           <tr>

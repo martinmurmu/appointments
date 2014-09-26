@@ -1,4 +1,5 @@
 class Manager::ManagersController < ManagerController
+  require 'securerandom'
   helper_method :sort_column, :sort_direction
   
   load_and_authorize_resource
@@ -8,7 +9,7 @@ class Manager::ManagersController < ManagerController
   def index
     logger.debug current_manager
 
-    @managers = Manager.where(["practice_name LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
+    @managers = Manager.where(["name LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
     
     @managers = @managers.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
     @manager = Manager.new
@@ -50,12 +51,18 @@ class Manager::ManagersController < ManagerController
   # TODO Check if this must be done in another action
   def create
     @manager = Manager.where(params[:manager]).create
-    @manager.practice_name = params[:manager][:practice_name]
-    @manager.practice_address = params[:manager][:practice_address].delete(" ")
-    @manager.practice_phone = params[:manager][:practice_phone].delete(" ")
+    @manager.name = params[:manager][:name]
+    @manager.phone = params[:manager][:phone].delete(" ")
+    @user = User.new
+    @user.email = params[:user][:email].delete(" ")
+    @user.password = Devise.friendly_token.first(GlobalConstants::DEFAULT_PASSWORD_LEN)
+    @user.password_confirmation = @user.password
+    @user.rolable_type = "Manager"
+    @user.rolable_id = @manager.id
+    @manager.user_id = @user.id
 
     respond_to do |format|
-      if @manager.save
+      if @user.save && @manager.save
         format.html { redirect_to manager_managers_path, notice: 'Well done! This patient has been waitlisted and will receive your broadcasts.' }
         format.json { render json: manager_managers_path, status: :created, location: @manager }
       else
@@ -76,7 +83,7 @@ class Manager::ManagersController < ManagerController
     @manager = Manager.find(params[:id])
     respond_to do |format|
       if @manager.update_attributes(params[:manager])
-        format.html { redirect_to manager_manager_path(@manager), notice: 'manager was successfully updated.' }
+        format.html { redirect_to manager_managers_path, notice: 'manager was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -104,10 +111,9 @@ class Manager::ManagersController < ManagerController
   # DELETE /manager/managers/1.json
   def destroy
     @manager = Manager.find(params[:id])
-    @manager.disable
-
+    p 3333333333333333333333333333333333333333333333333333333
     respond_to do |format|
-      if @manager.save
+      if @manager.destroy 
         format.html { redirect_to manager_managers_path, notice: 'manager was successfully removed.' }
         format.json { head :no_content }
       else

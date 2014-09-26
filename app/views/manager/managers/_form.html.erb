@@ -12,21 +12,15 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label "Practice Name", :class => "col-lg-2 col-sm-2 control-label" %>
+    <%= f.label "Manager Name", :class => "col-lg-2 col-sm-2 control-label" %>
     <div class="input-group col-lg-8">
-      <%= f.text_field :practice_name, :class => "form-control" %>
+      <%= f.text_field :name, :class => "form-control" %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label "Practice Address", :class => "col-lg-2 col-sm-2 control-label" %>
+    <%= f.label "Manager Phone", :class => "col-lg-2 col-sm-2 control-label" %>
     <div class="input-group col-lg-8">
-      <%= f.text_field :practice_address, :class => "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label "Practice Phone", :class => "col-lg-2 col-sm-2 control-label" %>
-    <div class="input-group col-lg-8">
-      <%= f.text_field :practice_phone, :class => "form-control" , :data => { :mask => "+1 999 999 9999"} %>
+      <%= f.text_field :phone, :class => "form-control" , :data => { :mask => "+1 999 999 9999"} %>
       <span class="help-inline">+1 999 999 9999</span>
     </div>
   </div>

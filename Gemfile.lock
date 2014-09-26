@@ -264,6 +264,7 @@ DEPENDENCIES
   god
   guard-rspec
   jquery-rails (~> 2.0)
+  kaminari
   meta_search (>= 1.1.0.pre)
   mysql2
   rails (= 3.2.14)
