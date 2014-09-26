@@ -6,8 +6,9 @@
   color: $panel_orange;
 }
 
-.btn.dropdown-toggle {
+.input-group-btn.dropdown .btn.dropdown-toggle {
   width: 120px;
+  border-radius: 4px;
 }
 .input-group-btn .btn-green {
   background: $panel_greenway;

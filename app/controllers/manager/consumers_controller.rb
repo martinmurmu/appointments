@@ -11,10 +11,10 @@ class Manager::ConsumersController < ManagerController
     if params[:appointment_id]
       appointment = Appointment.find(params[:appointment_id])
       @consumers = appointment.consumers.
-        where(["name LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
+        where(["name LIKE ? OR phone_number LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
     else
       @consumers = current_manager.rolable.consumers.
-        where(["name LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
+        where(["name LIKE ? OR phone_number LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
     end
     
     @consumers = @consumers.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)

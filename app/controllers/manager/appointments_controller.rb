@@ -7,7 +7,7 @@ class Manager::AppointmentsController < ManagerController
   # GET /manager/appointments.json
   def index
     @appointments = current_manager.rolable.appointments.
-      where(["description LIKE ?", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
+      where(["description LIKE ? OR assigned_pin LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%"]).order(sort_column + " " + sort_direction)
     @appointments = @appointments.paginate(page: params[:page], per_page: GlobalConstants::PAGE_LIST_NUM)
     @appointment = Appointment.new
 

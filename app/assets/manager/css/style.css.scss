@@ -704,7 +704,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     -ms-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
-    border: 1px solid #fff;
+    /*border: 1px solid #fff;*/
     box-shadow: none;
     background: url("../img/search-icon.jpg") no-repeat 10px 8px;
     padding:0 5px 0 35px;
@@ -2297,6 +2297,15 @@ ul.inbox-pagination li {
 
 .btn-send:hover {
     background: #009da7;
+}
+
+.modal-content .modal-header {
+  background: $panel_greenway;
+}
+
+.modal-content .btn-primary {
+  background: $panel_greenway;
+  border-color: $panel_greenway;
 }
 
 .modal-header h4.modal-title {
