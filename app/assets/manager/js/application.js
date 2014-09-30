@@ -19,10 +19,10 @@
 //= require ./jquery-ui-1.9.2.custom.min
 //= require ./jquery.tagsinput
 //= require ./jquery.dcjqaccordion.2.7
-//= require ./jquery.datetimepicker
 //= require ./respond.min
 //= require ./ga
 //= require ../assets/bootstrap-inputmask/bootstrap-inputmask.min
+//= require ../assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js
 //= require ./jquery.sparkline
 //= require ./count
 

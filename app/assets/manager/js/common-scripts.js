@@ -18,12 +18,10 @@ $(function() {
   	
   	// datetimepicker
   	$('#datetime').datetimepicker({
-  		formatDate: "dd MM yyyy",
-  		formatTime: "h:i a",
-  		timepicker:true,
+  		format: "dd MM yyyy - HH:ii P",
+	    showMeridian: true,
 	    autoclose: true,
-	    todayBtn: true,
-	    minuteStep: 5
+	    todayBtn: true
   	});
   	
   	$("button.date-set").click(function () {

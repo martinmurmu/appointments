@@ -18,5 +18,5 @@
  *= require ./appointment.css
  *= require ./consumer.css
  *= require ./faq.css
- *= require ./jquery.datetimepicker.css
+ *= require ../assets/bootstrap-datetimepicker/css/datetimepicker.css
  */
