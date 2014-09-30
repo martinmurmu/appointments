@@ -37,6 +37,8 @@ Appointments::Application.routes.draw do
         get 'new' => 'appointments#new'
         get 'consumers'
         put 'rebroadcast' => 'appointments#rebroadcast'
+        put 'filled' => 'appointments#filled'
+        put 'canceled' => 'appointments#canceled'
         put 'enable' => 'appointments#enable'
       end
       resources :consumers

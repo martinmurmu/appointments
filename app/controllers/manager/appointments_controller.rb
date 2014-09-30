@@ -175,12 +175,42 @@ class Manager::AppointmentsController < ManagerController
     appointment = Appointment.find(params[:id])
     
     respond_to do |format|
-      if !appointment.is_canceled?
+      if !appointment.is_broadcasted?
         # This method calls send_message_to_consumers
         appointment.set_broadcasted
         format.html { redirect_to manager_appointments_path, notice: "Rebroadcast done!" }
       else
         format.html { redirect_to manager_appointments_path, alert: "You only can rebroadcast non filled slots!" }
+      end
+    end
+  end
+  
+  # PUT /manager/appointments/:id/filled
+  def filled
+    appointment = Appointment.find(params[:id])
+    
+    respond_to do |format|
+      if !appointment.is_canceled?
+        # This method calls send_message_to_consumers
+        appointment.set_filled
+        format.html { redirect_to manager_appointments_path, notice: "Filled done!" }
+      else
+        format.html { redirect_to manager_appointments_path, alert: "You only can filled non filled slots!" }
+      end
+    end
+  end
+  
+  # PUT /manager/appointments/:id/canceled
+  def canceled
+    appointment = Appointment.find(params[:id])
+    
+    respond_to do |format|
+      if !appointment.is_canceled?
+        # This method calls send_message_to_consumers
+        appointment.set_canceled
+        format.html { redirect_to manager_appointments_path, notice: "Canceled done!" }
+      else
+        format.html { redirect_to manager_appointments_path, alert: "You only can cancel non filled slots!" }
       end
     end
   end

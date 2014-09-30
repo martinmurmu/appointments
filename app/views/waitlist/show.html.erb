@@ -1,6 +1,6 @@
 <%= form_for(@consumer, :url => {:action => 'new_consumer'}, 
   :html => {:class => "form-signin"}) do |f| %>
-  <h2 class="form-signin-heading">Waitlist for <%= @manager.practice_name %></h2>
+  <h2 class="form-signin-heading">Waitlist for <%= @manager.name %></h2>
   <div class="login-wrap">
     <% if @consumer.errors.any? %>
       <ul style="list-style-type: none">

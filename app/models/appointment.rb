@@ -63,10 +63,8 @@ class Appointment < ActiveRecord::Base
   end
 
   def set_canceled
-    if self.is_broadcasted?
-      self.status = CANCELED
-      self.save
-    end
+    self.status = CANCELED
+    self.save
   end
 
   def get_consumer_response
