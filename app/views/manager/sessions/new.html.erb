@@ -1,28 +1,29 @@
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-signin"}) do |f| %>
-
-  <h2 class="form-signin-heading">sign in now</h2>
-
-  <div class="login-wrap">
-
-    <%= f.text_field :email, :class => "form-control", :placeholder => "Your email", :autofocus => true %>
-  
-    <%= f.password_field :password, :class => "form-control", :placeholder => "Your password" %>
-
-    <% if devise_mapping.rememberable? %>
-      <label class="checkbox">
-        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
-        <span class="pull-right">
-          <%= link_to "Forgot Password?", new_manager_password_path %>
-        </span>
-      </label>
-    <% end %>
-
-    <%= f.submit "Sign in", :class => "btn btn-lg btn-login btn-block" %>
-
-    <div class="registration">
-        Don't have an account yet?
-        <%= link_to "Sign up", new_manager_registration_path %>
-    </div>
+<div class="main-content">
+  <div class="container">
+  	<div class="row">
+  	  <div class="form-content">
+  		<div class="signin-form">
+  			<img class="logo" src="/assets/mywaitlist-logo-withshadow.png">
+			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+			  <i class="fa fa-user"></i>
+			  <%= f.email_field :email, :autofocus => true, :class=>"form-control input-sm round-input email-input" %>
+			  <i class="fa fa-lock"></i>
+			  <%= f.password_field :password, :class=>"form-control input-sm round-input passwd-input" %>
+			  
+			  <div><%= f.submit "Login", :class=>"btn btn-round input-sm" %></div>
+			  
+			  <div class="link">
+			  <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+				<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+		      <% end -%>
+		      </div>
+			<% end %>			
+		</div>
+		<div class="link-form">
+			<div class="description-center"><label>Interested?</label></div>
+			<%= link_to "JOIN OUR WAITLIST", join_waitlist_path, :class=>"btn btn-round input-sm" %><br />
+		</div>
+	</div>
   </div>
-<% end %>
+</div>
 

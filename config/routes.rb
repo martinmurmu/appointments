@@ -7,7 +7,7 @@ Appointments::Application.routes.draw do
     devise_for :admin_users, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
   
-    root :to => 'home#index'
+    root :to => 'manager/home#index'
   
     # Join to waitlist
     get '/:token/join-waitlist' => 'waitlist#index', :as => 'join_waitlist'
@@ -18,7 +18,7 @@ Appointments::Application.routes.draw do
     post '/waitlist/:token/consumers' => 'waitlist#new_consumer'
     
     # lgoin and waitlist
-    get '/login' , to: redirect('/users/sign_in')
+    get '/login' , to: redirect('/peachtree-health/manager/sign_in')
     
     devise_for :manager, :class_name => "User", :controllers => {
       :registrations => "manager/registrations"
