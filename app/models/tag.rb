@@ -14,7 +14,7 @@ class Tag < ActiveRecord::Base
     # Instantiate a Twilio client
     client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
 
-    message = "Congrats, you are on #{self.manager.practice_name} waitlist!"
+    message = "Congrats, you are on #{self.manager.name} waitlist!"
     message += " You'll get a text with appt. times as soon as they become available!"
 
     # Create and send an SMS message. Message must be editable?

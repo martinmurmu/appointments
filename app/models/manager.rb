@@ -45,7 +45,7 @@ class Manager < ActiveRecord::Base
 
     managers.each do |manager|
       manager.consumers.each do |consumer|
-        message = "You are still on the #{manager.practice_name} waitlist."
+        message = "You are still on the #{manager.name} waitlist."
         message += " If you'd like to be removed please reply 'X #{manager.id}' to this message"
         message += " and we remove you from the waitlist."
 

@@ -4,7 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Phone</th>
-    <th>Address</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +11,8 @@
 
 <% @managers.each do |manager| %>
   <tr>
-    <td><%= manager.practice_name %></td>
-    <td><%= manager.practice_phone %></td>
-    <td><%= manager.practice_address %></td>
+    <td><%= manager.name %></td>
+    <td><%= manager.phone %></td>
     <td><%= link_to 'Show', admin_manager_path(manager) %></td>
     <td><%= link_to 'Edit', edit_admin_manager_path(manager) %></td>
     <td><%= link_to 'Destroy', admin_manager_path(manager), method: :delete, data: { confirm: 'Are you sure?' } %></td>

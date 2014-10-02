@@ -49,7 +49,7 @@
 		      </header>
 	      </div>
 	      <div class="col-lg-offset-4 col-lg-3">
-	      	<%= form_tag "/manager/appointments", :method => 'get' do %>
+	      	<%= form_tag manager_appointments_path, :method => 'get' do %>
 			  <p>
 			    <%= text_field_tag :search, "", :class => "form-control search" %>
 			    <%= submit_tag "", :name => nil, :class => "search-submit" %>
