@@ -1,7 +1,7 @@
 class Manager::HomeController < ManagerController
 
   def index
-    if current_manager
+    if current_manager && current_manager.rolable
       # get waitlister and appointments count by day
       @date_list = []
       date = Date.today - GlobalConstants::GRAPH_DAYS
@@ -36,13 +36,11 @@ class Manager::HomeController < ManagerController
       
       # json data for calendar
       @calendar_data = appointmentsbydate(Date.today)
-      p @calendar_data
-      
-      # new appointment
-      @appointment = Appointment.new
-      # new consumer
-      @consumer = Consumer.new
     end
+    # new appointment
+    @appointment = Appointment.new
+    # new consumer
+    @consumer = Consumer.new
   end
   
   # Ajax request for creating appointment at home

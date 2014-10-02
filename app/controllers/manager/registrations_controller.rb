@@ -15,12 +15,13 @@ class Manager::RegistrationsController < Devise::RegistrationsController
 
     # Creates a new Manager related to this User
     manager = Manager.new(
-      :practice_name => params[:practice_name],
-      :practice_address => params[:practice_address],
-      :practice_phone => params[:practice_phone]
+      :name => params[:name],
+      :phone => params[:phone]
     )
-
-    resource.rolable = manager
+    
+    if manager.save
+      resource.rolable = manager
+    end
 
     if resource.save
       if resource.active_for_authentication?
