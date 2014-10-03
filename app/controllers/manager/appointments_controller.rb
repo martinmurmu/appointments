@@ -59,7 +59,6 @@ class Manager::AppointmentsController < ManagerController
     
     respond_to do |format|
       if @appointment.save
-        @appointment.send_message_to_consumers
         format.html { redirect_to manager_appointments_path, notice: notice }
         format.json { render json: manager_appointment_path(@appointment), status: :created, location: @appointment }
       else

@@ -40,6 +40,74 @@ class Appointment < ActiveRecord::Base
     return (self.status == CANCELED)
   end
   
+  def send_message_to_consumers
+    logger.info "Called send_message_to_consumers..."
+#    Consumer Users are alerted in batches of 10. There will be a 10 minute lag 
+#    between notification sent to each 10 and if any one Consumer User repsonds 
+#    with Y, the next 10 will not be notified.
+
+#    "[PracticeName] has an open slot at X:XXP on MM/DD" Respond to "Y" to this 
+#    text and we will send you a confirmation pin and the booking phone number! 
+#    Slots go fast, so please confirm as soon as practical"
+
+    # Instantiate a Twilio client
+    client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+
+    manager = self.manager
+    manager_practice_name = manager.name
+
+    appointment_date = self.get_date
+    appointment_time = self.get_time
+
+    enabled_consumers = self.manager.consumers.where(:enabled => true)
+
+    logger.info "Run broadcast!"
+
+    count = 0
+
+    enabled_consumers.each do |consumer|
+      count += 1
+      # Old message.
+      # message = "#{manager_practice_name} has an open slot at #{appointment_time} on #{appointment_date}." 
+      # message += " Respond with 'Y #{self.id}' to this text and we will send you a confirmation pin"
+      # message += " and the booking phone number! Slots go fast, so please confirm as soon as practical."
+
+      message = "#{manager_practice_name} has an open appt. at #{appointment_time} on #{appointment_date}."
+      message += " Reply 'Y #{self.id}' to this text & we'll send a confirmation & booking! Slots go fast, please reply asap."
+
+      # Create and send an SMS message. Message must be editable?
+      logger.info "New slot message..."
+      logger.info "From: #{TWILIO_CONFIG['from']}"
+      logger.info "To: #{consumer.phone_number}"
+      logger.info "Message: #{message}"
+
+      # Send to 10 consumers then wait for 10 minutes
+      if (count == 1)
+        sleep(5)
+        count = 0
+      end
+      
+      begin
+        sms = client.account.sms.messages.create(
+           from: TWILIO_CONFIG['from'],
+           to: consumer.phone_number,
+           body: message
+         )
+  
+         Message.create!(
+           :sms_sid => sms.sid,
+           :consumer => consumer,
+           :manager => manager,
+           :body => sms.body,
+           :from => sms.from,
+           :to => sms.to
+         )
+       rescue Twilio::REST::RequestError
+         logger.info "Twillo:RequestError..."
+       end
+    end
+  end
+  
   def set_broadcasted
       logger.info "set_broadcasted"
     if self.is_filled?
@@ -92,70 +160,6 @@ class Appointment < ActiveRecord::Base
     return self.date.strftime("%B %e, %Y") #January 2, 2014
   end
 
-  def send_message_to_consumers
-    logger.info "Called send_message_to_consumers..."
-#    Consumer Users are alerted in batches of 10. There will be a 10 minute lag 
-#    between notification sent to each 10 and if any one Consumer User repsonds 
-#    with Y, the next 10 will not be notified.
-
-#    "[PracticeName] has an open slot at X:XXP on MM/DD" Respond to "Y" to this 
-#    text and we will send you a confirmation pin and the booking phone number! 
-#    Slots go fast, so please confirm as soon as practical"
-
-    # Instantiate a Twilio client
-    client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
-
-    manager = self.manager
-    manager_practice_name = manager.name
-
-    appointment_date = self.get_date
-    appointment_time = self.get_time
-
-    enabled_consumers = self.manager.consumers.where(:enabled => true)
-
-    logger.info "Run broadcast!"
-
-    count = 0
-
-    enabled_consumers.each do |consumer|
-      count += 1
-      # Old message.
-      # message = "#{manager_practice_name} has an open slot at #{appointment_time} on #{appointment_date}." 
-      # message += " Respond with 'Y #{self.id}' to this text and we will send you a confirmation pin"
-      # message += " and the booking phone number! Slots go fast, so please confirm as soon as practical."
-
-      message = "#{manager_practice_name} has an open appt. at #{appointment_time} on #{appointment_date}."
-      message += " Reply 'Y #{self.id}' to this text & we'll send a confirmation & booking! Slots go fast, please reply asap."
-
-      # Create and send an SMS message. Message must be editable?
-      logger.info "New slot message..."
-      logger.info "From: #{TWILIO_CONFIG['from']}"
-      logger.info "To: #{consumer.phone_number}"
-      logger.info "Message: #{message}"
-
-      # Send to 10 consumers then wait for 10 minutes
-      if (count == 1)
-        sleep(5)
-        count = 0
-      end
-
-      sms = client.account.sms.messages.create(
-         from: TWILIO_CONFIG['from'],
-         to: consumer.phone_number,
-         body: message
-       )
-
-       Message.create!(
-         :sms_sid => sms.sid,
-         :consumer => consumer,
-         :manager => manager,
-         :body => sms.body,
-         :from => sms.from,
-         :to => sms.to
-       )
-    end
-  end
-  
   #search
   def self.search(search)
     if search
@@ -165,6 +169,6 @@ class Appointment < ActiveRecord::Base
     end
   end
 
-  handle_asynchronously :send_message_to_consumers, :run_at => Proc.new { Time.zone.now }
+  handle_asynchronously :send_message_to_consumers1, :run_at => Proc.new { Time.zone.now }
 end
 
