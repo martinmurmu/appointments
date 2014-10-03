@@ -53,6 +53,7 @@ class Manager::AppointmentsController < ManagerController
     @appointment.date = str_datetime
     @appointment.time = str_datetime
     @appointment.manager = current_manager.rolable
+    #@appointment.assigned_pin = Pin.new
 
     notice = "Well done! You have broadcasted a message to your Waitlist. You'll get a phone call from the first patient to respond!"
     
