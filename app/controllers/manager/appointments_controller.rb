@@ -59,6 +59,7 @@ class Manager::AppointmentsController < ManagerController
     
     respond_to do |format|
       if @appointment.save
+        @appointment.send_message_to_consumers
         format.html { redirect_to manager_appointments_path, notice: notice }
         format.json { render json: manager_appointment_path(@appointment), status: :created, location: @appointment }
       else
@@ -176,13 +177,8 @@ class Manager::AppointmentsController < ManagerController
     appointment = Appointment.find(params[:id])
     
     respond_to do |format|
-      if !appointment.is_broadcasted?
-        # This method calls send_message_to_consumers
-        appointment.set_broadcasted
-        format.html { redirect_to manager_appointments_path, notice: "Rebroadcast done!" }
-      else
-        format.html { redirect_to manager_appointments_path, alert: "You only can rebroadcast non filled slots!" }
-      end
+      appointment.set_broadcasted
+      format.html { redirect_to manager_appointments_path, notice: "Rebroadcast done!" }
     end
   end
   
