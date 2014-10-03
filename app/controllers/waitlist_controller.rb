@@ -11,7 +11,6 @@ class WaitlistController < ApplicationController
   
   def show
     @manager = Manager.where(:token => params[:token]).first
-
     @consumer = Consumer.new
 
     respond_to do |format|
@@ -24,7 +23,7 @@ class WaitlistController < ApplicationController
   end
 
   def new_consumer
-    url = '/waitlist/' + params[:token]
+    url = root_path + '/waitlist/' + params[:token]
 
     @manager = Manager.where(:token => params[:token]).first
 

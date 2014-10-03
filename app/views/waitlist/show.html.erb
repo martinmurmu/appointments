@@ -1,37 +1,21 @@
-<%= form_for(@consumer, :url => {:action => 'new_consumer'}, 
-  :html => {:class => "form-signin"}) do |f| %>
-  <h2 class="form-signin-heading">Waitlist for <%= @manager.name %></h2>
-  <div class="login-wrap">
-    <% if @consumer.errors.any? %>
-      <ul style="list-style-type: none">
-      <% @consumer.errors.full_messages.each do |msg| %>
-        <li><span class="label label-danger"><%= msg %><span></li>
-      <% end %>
-      </ul>
-    <% end %>
-
-    <% if (alert) %>
-      <div align="center">
-        <span style="color: red"><%= alert %></span>
-      </div>
-    <% end %>
-
-    <% if (notice) %>
-      <div align="center">
-        <span style="color: green"><%= notice %></span>
-      </div>
-    <% end %>
-
-    <p>Enter Your Mobile Number Below</p>
-
-    <%= f.text_field :phone_number, :class => "form-control", 
-      :data => { :mask => "+1 999 999 9999"}, :required => true %>
-    <span class="help-inline">+1 999 999 9999</span>
-
-    <label class="checkbox">
-      <input type="checkbox" value="agree this condition" checked="checked" required /> I agree to the Terms of Service and Privacy Policy
-    </label>
-
-    <div><%= f.submit "Get On Waitlist", :class => "btn btn-lg btn-login btn-block" %></div>
+<div class="main-content">
+  <div class="container">
+	  <div class="row">
+	  	<div class="form-content">
+	  		<div class="signin-form">
+	  			<img class="logo" src="/assets/mywaitlist-logo-withshadow.png">
+				<%= form_for(@consumer, :url => {:action => 'new_consumer'}) do |f| %>
+				  <i class="fa fa-user"></i>
+				  <%= f.text_field :user_name, :value=> @manager.name, :autofocus => true, :class=>"form-control round-input email-input" %>
+				  <i class="fa fa-mobile"></i>
+				  <%= f.phone_field :phone_number, :value=> @manager.phone, :class=>"form-control round-input phone-input" %>
+				  
+				  <div><%= f.submit "Join Waitlist", :class=>"btn btn-round"%></div>
+				  
+				  <div class="description"><label>"By submitting, you agree to the terms and conditions.</label></div>
+				<% end %>			
+			</div>
+		</div>
+	  </div>
   </div>
-<% end %>
+</div>
