@@ -169,6 +169,6 @@ class Appointment < ActiveRecord::Base
     end
   end
 
-  handle_asynchronously :send_message_to_consumers
+  #handle_asynchronously :send_message_to_consumers, :run_at => Proc.new { Time.zone.now }
 end
 
