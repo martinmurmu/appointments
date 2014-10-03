@@ -54,7 +54,7 @@ class Appointment < ActiveRecord::Base
     client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
 
     manager = self.manager
-    manager_practice_name = manager.name
+    manager_practice_name = GlobalConstants::PRACTICE_NAME
 
     appointment_date = self.get_date
     appointment_time = self.get_time

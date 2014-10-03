@@ -1,4 +1,8 @@
 module GlobalConstants
+  
+  # practice_name
+  PRACTICE_NAME = "peachtree-health"
+  
   # default password len
   DEFAULT_PASSWORD_LEN = 8
    
