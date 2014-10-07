@@ -23,7 +23,10 @@ Configuration file is located in config/unicorn.rb.
 
 ## Staging Nginx Location ##
 
+The http entertainer is used is nginx and common commands are below.
 
+*sudo /etc/init.d/nginx stop
+*sudo /etc/init.d/nginx start
 
 ## Deploying Code on Production ENV ##
 
@@ -33,7 +36,20 @@ At the time of creation of this document the production environment is setup on 
 * Please add your public key to server for authentication by the following command ssh-copy-id deploy@104.131.226.86 
 * Now enter cap production deploy
 
-You are done with deployment. 
+You are done with deployment.
 
+## Production Unicorn Location ##
 
+This server is running unicorn as application server and automated script is located in /etc/init.d/unicorn . Below are the common commands.
 
+* /etc/init.d/unicorn stop
+* /etc/init.d/unicorn start
+
+Configuration file is located in config/unicorn.rb. 
+
+## Production Nginx Location ##
+
+The http entertainer is used is nginx and common commands are below.
+
+*sudo /etc/init.d/nginx stop
+*sudo /etc/init.d/nginx start
