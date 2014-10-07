@@ -53,3 +53,5 @@ The http entertainer is used is nginx and common commands are below.
 
 *sudo /etc/init.d/nginx stop
 *sudo /etc/init.d/nginx start
+
+The conf file is located on the server for mapping domains /etc/nginx/conf/nginx.conf. 
