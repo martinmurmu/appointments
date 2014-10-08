@@ -28,6 +28,8 @@ The http entertainer is used is nginx and common commands are below.
 *sudo /etc/init.d/nginx stop
 *sudo /etc/init.d/nginx start
 
+### There is a branch of staging, Use that branch to push to staging server. ###
+
 ## Deploying Code on Production ENV ##
 
 At the time of creation of this document the production environment is setup on server 
@@ -54,4 +56,6 @@ The http entertainer is used is nginx and common commands are below.
 *sudo /etc/init.d/nginx stop
 *sudo /etc/init.d/nginx start
 
-The conf file is located on the server for mapping domains /etc/nginx/conf/nginx.conf. 
+The conf file is located on the server for mapping domains /etc/nginx/conf/nginx.conf.
+
+### There is a branch of production, Use that branch to push to staging server. ###
