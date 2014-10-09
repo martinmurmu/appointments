@@ -136,6 +136,15 @@
 <% else %>
     <h1>Manager::Dashboard</h1>
     <p>Please sign in...</p>
+    <script>
+    	$(document).ready(function() {
+
+		  var totalCount = 9;
+		
+		    var num =  Math.ceil( Math.random() * totalCount );
+		    $("#container").css('background-image', 'url(/assets/waitlist-join-iphone'+num+'.jpg)'); 
+		});
+    </script>
 <% end %>
 	
 	<script src="/assets/js/jquery.sparkline.js" type="text/javascript"></script>

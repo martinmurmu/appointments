@@ -10,6 +10,10 @@ Website: http://thevectorlab.net/
 
 @import 'variables';
 
+html, body{
+  height: 100%;
+}
+
 body {
     color: #797979;
     background: #f1f2f7;
@@ -17,6 +21,11 @@ body {
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;
+}
+
+#container {
+  height: 100%;
+  background-size: cover;
 }
 
 ul li {

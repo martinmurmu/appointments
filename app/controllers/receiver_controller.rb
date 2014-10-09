@@ -29,7 +29,7 @@ class ReceiverController < ActionController::Base
       appointment = Appointment.find(parsedMessage[1])
 
       manager = appointment.manager
-      manager_phone_number = manager.practice_phone
+      manager_phone_number = manager.phone
 
       consumer = Consumer.where(:phone_number => from_number).first
 

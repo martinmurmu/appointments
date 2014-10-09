@@ -113,6 +113,21 @@ class Manager::ConsumersController < ManagerController
       end
     end
   end
+  
+  # PUT /manager/consumers/1/disable
+  def disable
+    consumer = Consumer.find(params[:id])
+    consumer.disable
+    respond_to do |format|
+      if consumer.save
+        format.html { redirect_to manager_consumers_path, notice: 'Consumer was successfully disabled.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to manager_consumers_path, notice: 'Error trying to disable the Consumer.' }
+        format.json { render json: @consumer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /manager/consumers/1
   # DELETE /manager/consumers/1.json

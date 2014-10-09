@@ -48,6 +48,7 @@ Appointments::Application.routes.draw do
         member do
           get 'tags'
           put 'enable' => 'consumers#enable'
+          put 'disable' => 'consumers#disable'
         end
         resources :tags
       end
